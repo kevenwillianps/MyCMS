@@ -1,0 +1,9 @@
+{
+    "url_aplicacao": "http:\/\/localhost\/MyCMS\/",
+    "database": {
+        "name": "mycms",
+        "user": "root",
+        "password": "",
+        "charset": "UTF-8"
+    }
+}

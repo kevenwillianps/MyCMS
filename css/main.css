@@ -1,0 +1,125 @@
+@font-face {
+    font-family: Poppins-Regular;
+    src: url(../fonts/Poppins/Poppins-Regular.ttf)
+}
+
+html {
+
+    scroll-behavior: smooth !important
+
+}
+
+body {
+
+    background: rgba(242, 245, 252, 1) !important;
+    color: #494f54 !important;
+    font-family: Poppins-Regular !important;
+    padding-bottom: 1rem!important;
+
+}
+
+.bg-light {
+
+    background-color: #ffffff !important;
+
+}
+
+.nav-link-pill {
+
+    background: #f4f8fb !important;
+
+}
+
+.grid-divider {
+    overflow-x: hidden;
+    position: relative;
+}
+
+.grid-divider > [class*="col-"]:nth-child(n + 2):after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.09);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+@media (max-width: 767px) {
+    .grid-divider > [class*="col-"]:nth-child(n + 2):after {
+        width: 100%;
+        height: 1px;
+        left: 0;
+        top: -4px;
+    }
+}
+
+@media (min-width: 768px) {
+    .grid-divider > [class*="col-"]:nth-child(n + 2):after {
+        width: 1px;
+        height: auto;
+        left: -1px;
+    }
+}
+
+.display-none {
+
+    display: none;
+
+}
+
+.bg-gray {
+
+    background-color: #f4f8fb !important;
+
+}
+
+/* This class is already present in Bootstrap navbar. No need to add maually */
+.navbar {
+    background: rgba(255, 255, 255, 0.7) !important; /* Give transparent white background to navbar */
+    /* 0.2 to give little whitish effect. */
+    /* Put 0 to get complete transperency */
+    backdrop-filter: blur(10px) saturate(125%); /* Blur the background */
+    /* 10px Gaussian Blur and saturate for fluent design */
+    -webkit-backdrop-filter: blur(10px) saturate(125%); /* Increases browser compability (safari ios and mac) */
+}
+
+.profile-head {
+    transform: translateY(5rem)
+}
+
+.cover {
+    background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+.stats {
+    background: #f2f5f8 !important;
+    color: #000 !important
+}
+
+.articles {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number1 {
+    font-weight: 500
+}
+
+.followers {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number2 {
+    font-weight: 500
+}
+
+.rating {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number3 {
+    font-weight: 500
+}
