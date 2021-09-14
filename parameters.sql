@@ -28,15 +28,6 @@ CREATE TABLE highlighters (
 )
   ENGINE = innodb;
 
-CREATE TABLE highlighters_files (
-  highlighter_file_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name                VARCHAR(121) NOT NULL,
-  description         VARCHAR(121) NOT NULL,
-  history             longtext     NOT NULL,
-  date                TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
-)
-  ENGINE = innodb;
-
 CREATE TABLE content_categories (
   content_category_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   situation_id        INT UNSIGNED,
@@ -121,7 +112,7 @@ CREATE TABLE contents_subs (
   ENGINE = innodb;
 
 CREATE TABLE contents_subs_files (
-  content_file_id  INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  content_sub_file_id  INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   content_sub_id   INT(11) UNSIGNED,
   highlighter_id   INT(11) UNSIGNED,
   situation_id     INT(11) UNSIGNED,

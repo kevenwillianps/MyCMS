@@ -42,9 +42,27 @@ $Contents = new Contents();
     if (count($Contents->All()) === 0)
     { ?>
 
-        <div class="col-md-2 mx-auto mt-3">
+        <div class="col-md-12">
 
-            <img src="image/desert.svg" alt="" class="img-fluid">
+            <div class="alert alert-warning border-warning shadow-sm" role="alert">
+
+                <h4 class="alert-heading">
+
+                    <strong>
+
+                        Ooops!
+
+                    </strong>
+
+                </h4>
+
+                <p>
+
+                    Nõ foram localizados registros
+
+                </p>
+
+            </div>
 
         </div>
 

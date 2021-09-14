@@ -42,9 +42,27 @@ $Highlighters = new Highlighters();
     if (count($Highlighters->All()) === 0)
     { ?>
 
-        <div class="col-md-2 mx-auto mt-3">
+        <div class="col-md-12">
 
-            <img src="image/desert.svg" alt="" class="img-fluid">
+            <div class="alert alert-warning border-warning shadow-sm" role="alert">
+
+                <h4 class="alert-heading">
+
+                    <strong>
+
+                        Ooops!
+
+                    </strong>
+
+                </h4>
+
+                <p>
+
+                    Nõ foram localizados registros
+
+                </p>
+
+            </div>
 
         </div>
 
@@ -67,6 +85,12 @@ $Highlighters = new Highlighters();
                         <th scope="col">
 
                             Nome
+
+                        </th>
+
+                        <th scope="col">
+
+                            Descrição
 
                         </th>
 
@@ -99,6 +123,12 @@ $Highlighters = new Highlighters();
                         <td>
 
                             <?php echo utf8_encode(@(string)$resultHighlighters->name)?>
+
+                        </td>
+
+                        <td>
+
+                            <?php echo utf8_encode(@(string)$resultHighlighters->description)?>
 
                         </td>
 

@@ -53,9 +53,27 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
     if (count($ContentsSubs->All($_POST['CONTENT_ID'])) === 0)
     { ?>
 
-        <div class="col-md-2 mx-auto mt-3">
+        <div class="col-md-12">
 
-            <img src="image/desert.svg" alt="" class="img-fluid">
+            <div class="alert alert-warning border-warning shadow-sm" role="alert">
+
+                <h4 class="alert-heading">
+
+                    <strong>
+
+                        Ooops!
+
+                    </strong>
+
+                </h4>
+
+                <p>
+
+                    Nõ foram localizados registros
+
+                </p>
+
+            </div>
 
         </div>
 
@@ -146,6 +164,18 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
                                         </span>
 
                                         Editar
+
+                                    </a>
+
+                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS_FILES&ACTION=CONTENTS_SUBS_FILES_DATAGRID&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_id)?>&CONTENT_SUB_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_sub_id)?>')">
+
+                                        <span class="badge badge-primary mr-1">
+
+                                            <i class="far fa-image"></i>
+
+                                        </span>
+
+                                        Arquivos
 
                                     </a>
 

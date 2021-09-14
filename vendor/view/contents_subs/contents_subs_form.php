@@ -75,7 +75,7 @@
 
                             <option data-tokens="<?php echo utf8_encode(@(string)$resultHighlighter->name)?>" value="<?php echo utf8_encode(@(int)$resultHighlighter->highlighter_id)?>" <?php echo utf8_encode(@(int)$resultHighlighter->highlighter_id === @(int)$resultContentSub->highlighter_id) ? 'selected' : null?>>
 
-                                <?php echo utf8_encode(@(string)$resultHighlighter->name)?>
+                                <?php echo utf8_encode(@(string)$resultHighlighter->description)?>
 
                             </option>
 

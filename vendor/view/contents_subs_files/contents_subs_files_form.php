@@ -3,19 +3,19 @@
 /** Importação de classes */
 use vendor\model\Situations;
 use vendor\model\Highlighters;
-use \vendor\model\Contents;
-use \vendor\model\ContentsFiles;
-use \vendor\controller\contents_files\ContentsFilesValidade;
+use \vendor\model\ContentsSubs;
+use \vendor\model\ContentsSubsFiles;
+use \vendor\controller\contents_subs_files\ContentsSubsFilesValidaTe;
 
 /** Instânciamento de classes */
 $Situations = new Situations();
 $Highlighters = new Highlighters();
-$Contents = new Contents();
-$ContentsFiles = new ContentsFiles();
-$ContentsFilesValidade = new ContentsFilesValidade();
+$ContentsSubs = new ContentsSubs();
+$ContentsSubsFiles = new ContentsSubsFiles();
+$ContentsSubsFilesValidaTe = new ContentsSubsFilesValidaTe();
 
 /** Busco o registro */
-$resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
+$resultContentSub = $ContentsSubs->Get(@(int)$_POST['CONTENT_SUB_ID']);
 
 ?>
 
@@ -31,9 +31,9 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
             </strong>
 
-            /<?php echo utf8_encode(@(string)$resultContent->title)?>/Arquivos/
+            /Vinculados/<?php echo utf8_encode(@(string)$resultContentSub->title)?>/Arquivos/Formulário
 
-            <button type="button" class="btn btn-primary btn-sm" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_FILES&ACTION=CONTENTS_FILES_DATAGRID&CONTENT_ID=<?php echo utf8_encode(@(string)$resultContent->content_id)?>')">
+            <button type="button" class="btn btn-primary btn-sm" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS&ACTION=CONTENTS_SUBS_DATAGRID&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContentSub->content_id)?>')">
 
                 <i class="fas fa-chevron-left mr-1"></i>Voltar
 
@@ -160,10 +160,10 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
                 </button>
 
-                <input type="hidden" name="content_id" value="<?php echo utf8_encode($_POST['CONTENT_ID'])?>"/>
+                <input type="hidden" name="content_sub_id" value="<?php echo utf8_encode($_POST['CONTENT_SUB_ID'])?>"/>
                 <input type="hidden" name="FOLDER" value="ACTION"/>
-                <input type="hidden" name="TABLE" value="CONTENTS_FILES"/>
-                <input type="hidden" name="ACTION" value="CONTENTS_FILES_SAVE"/>
+                <input type="hidden" name="TABLE" value="CONTENTS_SUBS_FILES"/>
+                <input type="hidden" name="ACTION" value="CONTENTS_SUBS_FILES_SAVE"/>
 
             </form>
 

@@ -191,14 +191,6 @@ class ContentsSubsValidate
         /** Tratamento da informação */
         $this->contentComplete = isset($contentComplete) ? $this->Main->antiInjection($contentComplete, 'S') : null;
 
-        /** Validação da informação */
-        if (empty($this->contentComplete)) {
-
-            /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Conteúdo Completo", deve ser válido');
-
-        }
-
     }
 
     public function setVisited(string $visited): void
