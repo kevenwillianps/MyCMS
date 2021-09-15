@@ -1,9 +1,8 @@
 <?php
 
 /** Importação de classes */
-
 use vendor\model\Configurations;
-use vendor\controller\Configurations\ConfigurationsValidate;
+use vendor\controller\configurations\ConfigurationsValidate;
 
 /** Instânciamento de classes */
 $Configurations = new Configurations();
@@ -17,15 +16,20 @@ $history = array();
 try {
 
     /** Parâmetros de entrada */
-    $SituationsValidate->setSituationId(@(int)$_POST['situation_id']);
-    $SituationsValidate->setName(@(string)$_POST['name']);
-    $SituationsValidate->setDescription(@(string)$_POST['description']);
+    $ConfigurationsValidate->setConfigurationId(@(int)$_POST['configuration_id']);
+    $ConfigurationsValidate->setTitle(@(string)$_POST['title']);
+    $ConfigurationsValidate->setCopyright(@(string)$_POST['copyright']);
+    $ConfigurationsValidate->setAuthor(@(string)$_POST['author']);
+    $ConfigurationsValidate->setDescription(@(string)$_POST['description']);
+    $ConfigurationsValidate->setKeywords(@(string)$_POST['keywords']);
+    $ConfigurationsValidate->setPreferences(@(string)$_POST['preferences']);
+    $ConfigurationsValidate->setHistory(@(string)$_POST['history']);
 
     /** Verifico o tipo de histórico */
-    if ($SituationsValidate->getSituationId() > 0) {
+    if ($ConfigurationsValidate->getHistory() > 0) {
 
         /** Busco o Histórico */
-        $resultHistory = json_decode(base64_decode($Situations->Get($SituationsValidate->getSituationId())->history),true);
+        $resultHistory = json_decode(base64_decode($Configurations->Get($ConfigurationsValidate->getHistory())->history),true);
 
         /** Captura dos dados de login */
         $history[0]['title'] = 'Atualização';
@@ -48,24 +52,25 @@ try {
     $history[0]['time'] = date('H:i:s');
 
     /** Salvo o histórico do registro */
-    $SituationsValidate->setHistory(base64_encode(json_encode($history, JSON_PRETTY_PRINT)));
+    $ConfigurationsValidate->setHistory(base64_encode(json_encode($history, JSON_PRETTY_PRINT)));
 
     /** Verifico a existência de erros */
-    if (!empty($SituationsValidate->getErrors())) {
+    if (!empty($ConfigurationsValidate->getErrors())) {
 
         /** Preparo o formulario para retorno **/
         $result = [
 
             'cod' => 0,
             'title' => 'Atenção',
-            'message' => $SituationsValidate->getErrors(),
+            'message' => $ConfigurationsValidate->getErrors(),
 
         ];
 
     } else {
 
         /** Verifico se o usuário foi localizado */
-        if ($Situations->Save($SituationsValidate->getSituationId(), $SituationsValidate->getName(), $SituationsValidate->getDescription(), $SituationsValidate->getHistory())) {
+        if ($Configurations->Save($ConfigurationsValidate->getConfigurationId(), $ConfigurationsValidate->getTitle(), $ConfigurationsValidate->getCopyright(), $ConfigurationsValidate->getAuthor(), $ConfigurationsValidate->getDescription(), $ConfigurationsValidate->getKeywords(), $ConfigurationsValidate->getPreferences(), $ConfigurationsValidate->getHistory()))
+        {
 
             /** Adição de elementos na array */
             $message = 'Registro salvo com sucesso';
@@ -76,7 +81,7 @@ try {
                 'cod' => 200,
                 'title' => 'Sucesso',
                 'message' => $message,
-                'redirect' => 'FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DATAGRID',
+                'redirect' => 'FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_DATAGRID',
 
             ];
 

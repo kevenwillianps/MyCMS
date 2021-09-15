@@ -1,7 +1,7 @@
 <?php
 
 /** Defino o local da classes */
-namespace vendor\controller\Configurations;
+namespace vendor\controller\configurations;
 
 /** Importação de classes */
 use vendor\model\Main;
@@ -16,10 +16,11 @@ class ConfigurationsValidate
 
     private $configurationId = null;
     private $title = null;
+    private $copyright = null;
+    private $author = null;
     private $description = null;
     private $keywords = null;
-    private $author = null;
-    private $copyright = null;
+    private $preferences = null;
     private $history = null;
 
     /** Método construtor */
@@ -31,119 +32,116 @@ class ConfigurationsValidate
 
     }
 
-    public function setConfigurationId(int $configurationId): void
+    public function setConfigurationId(int $configurationId) : void
     {
 
         /** Tratamento da informação */
         $this->configurationId = isset($configurationId) ? $this->Main->antiInjection($configurationId) : null;
 
-        /** Validação da informação */
-        if ($this->configurationId < 0) {
-
-            /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Configuração ID", deve ser válido');
-
-        }
-
     }
 
-    public function setTitle(string $title): void
+    public function setTitle(string $title) : void
     {
 
         /** Tratamento da informação */
         $this->title = isset($title) ? $this->Main->antiInjection($title) : null;
 
         /** Validação da informação */
-        if (empty($this->title)) {
+        if (empty($this->title))
+        {
 
             /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Título", deve ser válido');
+            array_push($this->errors, 'O campo "Título", deve ser preenchido');
 
         }
 
     }
 
-    public function setDescription(string $description): void
-    {
-
-        /** Tratamento da informação */
-        $this->description = isset($description) ? $this->Main->antiInjection($description) : null;
-
-        /** Validação da informação */
-        if (empty($this->description)) {
-
-            /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Descrição", deve ser válido');
-
-        }
-
-    }
-
-    public function setKeywords(string $keywords): void
-    {
-
-        /** Tratamento da informação */
-        $this->keywords = isset($keywords) ? $this->Main->antiInjection($keywords) : null;
-
-        /** Validação da informação */
-        if (empty($this->keywords)) {
-
-            /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Palavras Chaves", deve ser válido');
-
-        }
-
-    }
-
-    public function setAuthor(string $author): void
-    {
-
-        /** Tratamento da informação */
-        $this->author = isset($author) ? $this->Main->antiInjection($author) : null;
-
-        /** Validação da informação */
-        if (empty($this->author)) {
-
-            /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Autor", deve ser válido');
-
-        }
-
-    }
-
-    public function setCopyright(string $copyright): void
+    public function setCopyright(string $copyright) : void
     {
 
         /** Tratamento da informação */
         $this->copyright = isset($copyright) ? $this->Main->antiInjection($copyright) : null;
 
         /** Validação da informação */
-        if (empty($this->copyright)) {
+        if (empty($this->copyright))
+        {
 
             /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Copyright", deve ser válido');
+            array_push($this->errors, 'O campo "Copyright", deve ser preenchido');
 
         }
 
     }
 
-    public function setHistory(string $history): void
+    public function setAuthor(string $author) : void
+    {
+
+        /** Tratamento da informação */
+        $this->author = isset($author) ? $this->Main->antiInjection($author) : null;
+
+        /** Validação da informação */
+        if (empty($this->author))
+        {
+
+            /** Adiciono um elemento a array */
+            array_push($this->errors, 'O campo "Autor", deve ser preenchido');
+
+        }
+
+    }
+
+    public function setDescription(string $description) : void
+    {
+
+        /** Tratamento da informação */
+        $this->description = isset($description) ? $this->Main->antiInjection($description) : null;
+
+        /** Validação da informação */
+        if (empty($this->description))
+        {
+
+            /** Adiciono um elemento a array */
+            array_push($this->errors, 'O campo "Descrição", deve ser preenchido');
+
+        }
+
+    }
+
+    public function setKeywords(string $keywords) : void
+    {
+
+        /** Tratamento da informação */
+        $this->keywords = isset($keywords) ? $this->Main->antiInjection($keywords) : null;
+
+        /** Validação da informação */
+        if (empty($this->keywords))
+        {
+
+            /** Adiciono um elemento a array */
+            array_push($this->errors, 'O campo "Palavras Chaves", deve ser preenchido');
+
+        }
+
+    }
+
+    public function setPreferences(string $preferences) : void
+    {
+
+        /** Tratamento da informação */
+        $this->preferences = isset($preferences) ? $this->Main->antiInjection($preferences) : null;
+
+    }
+
+    public function setHistory(string $history) : void
     {
 
         /** Tratamento da informação */
         $this->history = isset($history) ? $this->Main->antiInjection($history) : null;
 
-        /** Validação da informação */
-        if (empty($this->history)) {
-
-            /** Adiciono um elemento a array */
-            array_push($this->errors, 'O campo "Histórico", deve ser válido');
-
-        }
-
     }
 
-    public function getConfigurationId(): int
+    public function getConfigurationId() : int
     {
 
         /** Retorno da informação */
@@ -151,51 +149,59 @@ class ConfigurationsValidate
 
     }
 
-    public function getTitle(): string
+    public function getTitle() : string
     {
 
         /** Retorno da informação */
-        return (string)$this->title;
+        return $this->title;
 
     }
 
-    public function getDescription(): string
+    public function getCopyright() : string
     {
 
         /** Retorno da informação */
-        return (string)$this->description;
+        return $this->copyright;
 
     }
 
-    public function getKeywords(): string
+    public function getAuthor() : string
     {
 
         /** Retorno da informação */
-        return (string)$this->keywords;
+        return $this->author;
 
     }
 
-    public function getAuthor(): string
+    public function getDescription() : string
     {
 
         /** Retorno da informação */
-        return (string)$this->author;
+        return $this->description;
 
     }
 
-    public function getCopyright(): string
+    public function getKeywords() : string
     {
 
         /** Retorno da informação */
-        return (string)$this->copyright;
+        return $this->keywords;
 
     }
 
-    public function getHistory(): string
+    public function getPreferences() : string
     {
 
         /** Retorno da informação */
-        return (string)$this->history;
+        return $this->preferences;
+
+    }
+
+    public function getHistory() : string
+    {
+
+        /** Retorno da informação */
+        return $this->history;
 
     }
 

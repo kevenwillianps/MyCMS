@@ -34,7 +34,7 @@ try {
     $ContentsSubsValidate->setDescription(@(string)$_POST['description']);
     $ContentsSubsValidate->setContentResume(@(string)$_POST['content_resume']);
     $ContentsSubsValidate->setContentComplete(@(string)$_POST['content_complete']);
-    $ContentsSubsValidate->setVisited(@(int)$_POST['visited']);
+    $ContentsSubsValidate->setKeywords(@(string)$_POST['keywords']);
     $ContentsSubsValidate->setDateStart(@(string)$_POST['date_start']);
     $ContentsSubsValidate->setDateClosing(@(string)$_POST['date_closing']);
 
@@ -82,7 +82,7 @@ try {
     } else {
 
         /** Verifico se o usuário foi localizado */
-        if ($ContentsSubs->Save($ContentsSubsValidate->getContentSubId(), $ContentsSubsValidate->getContentId(), $ContentsSubsValidate->getHighlighterId(), $ContentsSubsValidate->getSituationId(), $ContentsSubsValidate->getUserId(), $ContentsSubsValidate->getPositionContent(), $ContentsSubsValidate->getPositionMenu(), $ContentsSubsValidate->getUrl(), $ContentsSubsValidate->getTitle(), $ContentsSubsValidate->getTitleMenu(), $ContentsSubsValidate->getDescription(), $ContentsSubsValidate->getContentResume(), $ContentsSubsValidate->getContentComplete(), $ContentsSubsValidate->getVisited(), $ContentsSubsValidate->getDateStart(), $ContentsSubsValidate->getDateClosing(), $ContentsSubsValidate->getHistory()))
+        if ($ContentsSubs->Save($ContentsSubsValidate->getContentSubId(), $ContentsSubsValidate->getContentId(), $ContentsSubsValidate->getHighlighterId(), $ContentsSubsValidate->getSituationId(), $ContentsSubsValidate->getUserId(), $ContentsSubsValidate->getPositionContent(), $ContentsSubsValidate->getPositionMenu(), $ContentsSubsValidate->getUrl(), $ContentsSubsValidate->getTitle(), $ContentsSubsValidate->getTitleMenu(), $ContentsSubsValidate->getDescription(), $ContentsSubsValidate->getContentResume(), $ContentsSubsValidate->getContentComplete(), $ContentsSubsValidate->getKeywords(), $ContentsSubsValidate->getDateStart(), $ContentsSubsValidate->getDateClosing(), $ContentsSubsValidate->getHistory()))
         {
 
             /** Adição de elementos na array */

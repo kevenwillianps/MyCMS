@@ -295,6 +295,22 @@
 
             </div>
 
+            <div class="col-md-12">
+
+                <div class="form-group">
+
+                    <label for="keywords">
+
+                        Palavras Chaves:
+
+                    </label>
+
+                    <input type="text" class="form-control" id="keywords" name="keywords" value="<?php echo utf8_encode(@(string)$resultContent->keywords)?>">
+
+                </div>
+
+            </div>
+
         </div>
 
         <div class="form-group mb-0 text-right">

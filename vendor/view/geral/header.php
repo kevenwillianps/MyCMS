@@ -16,6 +16,20 @@
 
         <div class="collapse navbar-collapse">
 
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+
+                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_DATAGRID')">
+
+                        <i class="fas fa-cog mr-1"></i>Configurações
+
+                    </a>
+
+                </li>
+
+            </ul>
+
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
@@ -36,7 +50,7 @@
 
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top shadow-sm" style="border-bottom: solid 2px;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top shadow-sm">
 
     <div class="container">
 

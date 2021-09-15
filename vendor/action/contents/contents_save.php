@@ -34,7 +34,7 @@ try {
     $ContentsValidade->setDescription(@(string)$_POST['description']);
     $ContentsValidade->setContentResume(@(string)$_POST['content_resume']);
     $ContentsValidade->setContentComplete(@(string)$_POST['content_complete']);
-    $ContentsValidade->setVisited(@(int)$_POST['visited']);
+    $ContentsValidade->setKeywords(@(string)$_POST['keywords']);
     $ContentsValidade->setDateStart(@(string)$_POST['date_start']);
     $ContentsValidade->setDateClosing(@(string)$_POST['date_closing']);
 
@@ -82,7 +82,7 @@ try {
     } else {
 
         /** Verifico se o usuário foi localizado */
-        if ($Contents->Save($ContentsValidade->getContentId(), $ContentsValidade->getContentCategoryId(), $ContentsValidade->getHighlighterId(), $ContentsValidade->getSituationId(), $ContentsValidade->getUserId(), $ContentsValidade->getPositionContent(), $ContentsValidade->getPositionMenu(), $ContentsValidade->getUrl(), $ContentsValidade->getTitle(), $ContentsValidade->getTitleMenu(), $ContentsValidade->getDescription(), $ContentsValidade->getContentResume(), $ContentsValidade->getContentComplete(), $ContentsValidade->getVisited(), $ContentsValidade->getDateStart(), $ContentsValidade->getDateClosing(), $ContentsValidade->getHistory()))
+        if ($Contents->Save($ContentsValidade->getContentId(), $ContentsValidade->getContentCategoryId(), $ContentsValidade->getHighlighterId(), $ContentsValidade->getSituationId(), $ContentsValidade->getUserId(), $ContentsValidade->getPositionContent(), $ContentsValidade->getPositionMenu(), $ContentsValidade->getUrl(), $ContentsValidade->getTitle(), $ContentsValidade->getTitleMenu(), $ContentsValidade->getDescription(), $ContentsValidade->getContentResume(), $ContentsValidade->getContentComplete(), $ContentsValidade->getKeywords(), $ContentsValidade->getDateStart(), $ContentsValidade->getDateClosing(), $ContentsValidade->getHistory()))
         {
 
             /** Adição de elementos na array */

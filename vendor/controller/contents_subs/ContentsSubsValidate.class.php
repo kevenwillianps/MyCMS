@@ -27,7 +27,7 @@ class ContentsSubsValidate
     private $description = null;
     private $contentResume = null;
     private $contentComplete = null;
-    private $visited = null;
+    private $keywords = null;
     private $dateStart = null;
     private $dateClosing = null;
     private $history = null;
@@ -193,11 +193,11 @@ class ContentsSubsValidate
 
     }
 
-    public function setVisited(string $visited): void
+    public function setKeywords(string $keywords): void
     {
 
         /** Tratamento da informação */
-        $this->visited = isset($visited) ? $this->Main->antiInjection($visited) : null;
+        $this->keywords = isset($keywords) ? $this->Main->antiInjection($keywords) : null;
 
     }
 
@@ -337,11 +337,11 @@ class ContentsSubsValidate
 
     }
 
-    public function getVisited(): string
+    public function getKeywords(): string
     {
 
         /** Retorno da informação */
-        return (string)$this->visited;
+        return (string)$this->keywords;
 
     }
 

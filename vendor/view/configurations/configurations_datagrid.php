@@ -1,14 +1,13 @@
 <?php
 
 /** Importação de classes */
-
 use vendor\model\Configurations;
 
 /** Instânciamento de Classes */
 $Configurations = new Configurations();
 
-/** Busco as configurações atuais */
-$resultConfigurations = $Configurations->All();
+/** Busco a configuração */
+$resultConfiguration = $Configurations->All();
 
 ?>
 
@@ -20,7 +19,7 @@ $resultConfigurations = $Configurations->All();
 
             <strong>
 
-                <i class="fas fa-cog mr-1"></i>Configurações
+                <i class="fas fa-cog mr-1"></i>Configuração
 
             </strong>
 
@@ -30,193 +29,154 @@ $resultConfigurations = $Configurations->All();
 
     </div>
 
-    <div class="col-md-6 text-right">
+    <?php
 
-        <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_FORM&CONFIGURATION_ID=<?php echo utf8_encode(@(int)$resultConfigurations->configuration_id)?>')">
+    /** Verifico se existem registros */
+    if (@(int)$resultConfiguration->configuration_id === 0)
+    { ?>
 
-            <i class="fas fa-plus-circle mr-1"></i>Editar
+        <div class="col-md-6 text-right">
 
-        </button>
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_FORM')">
 
-    </div>
+                <i class="fas fa-plus-circle mr-1"></i>Adicionar
 
-    <div class="col-md-12 mb-3 mt-1">
+            </button>
 
-        <div class="card shadow-sm">
+        </div>
 
-            <div class="card-body">
+    <?php }else{ ?>
 
-                <h5 class="card-title">
+        <div class="col-md-6 text-right">
 
-                    <?php echo utf8_encode(@(string)$resultConfigurations->title)?>
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_FORM&CONFIGURATION_ID=<?php echo @(int)$resultConfiguration->configuration_id?>')">
 
-                </h5>
+                <i class="fas fa-pencil-alt mr-1"></i>Editar
 
-                <h6 class="card-subtitle">
+            </button>
 
-                    <?php echo utf8_encode(@(string)$resultConfigurations->author)?>
+        </div>
 
-                </h6>
+    <?php }?>
+
+    <?php
+
+    /** Verifico se existem registros */
+    if (@(int)$resultConfiguration->configuration_id === 0)
+    { ?>
+
+        <div class="col-md-12">
+
+            <div class="alert alert-warning border-warning shadow-sm" role="alert">
+
+                <h4 class="alert-heading">
+
+                    <strong>
+
+                        Ooops!
+
+                    </strong>
+
+                </h4>
+
+                <p>
+
+                    Nõ foram localizados registros
+
+                </p>
 
             </div>
 
         </div>
 
-    </div>
+    <?php }else{ ?>
 
-    <div class="col-md-4 d-flex mb-1">
+        <div class="col-md-12 my-1">
 
-        <div class="card shadow-sm w-100">
+            <div class="card shadow-sm">
 
-            <div class="card-body">
+                <div class="card-body">
 
-                <h6 class="card-title text-semi-bold">
+                    <h5 class="card-title">
 
-                    <i class="fas fa-info-circle mr-1"></i>Sobre
+                        <?php echo utf8_encode(@(string)$resultConfiguration->title)?>
 
-                </h6>
+                    </h5>
 
-                <ul class="list-unstyled">
+                    <h6 class="card-subtitle">
 
-                    <li class="media">
+                        <?php echo utf8_encode(@(string)$resultConfiguration->description)?>
 
-                        <div class="media-body">
+                    </h6>
 
-                            <h6 class="mt-0 mb-1">
-
-                                <i class="fas fa-restroom mr-1"></i>Tabelião Nome
-
-                            </h6>
-
-                            <p>
-
-                                asd asd asd
-                            </p>
-
-                        </div>
-
-                    </li>
-
-                    <li class="media">
-
-                        <div class="media-body">
-
-                            <h6 class="mt-0 mb-1">
-
-                                <i class="fas fa-restroom mr-1"></i>Tabelião Cargo
-
-                            </h6>
-
-                            <p>
-
-                                asd as d
-                            </p>
-
-                        </div>
-
-                    </li>
-
-                </ul>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-md-4 d-flex mb-1">
 
-    <div class="col-md-4 d-flex mb-1">
+            <div class="card shadow-sm w-100">
 
-        <div class="card w-100 shadow-sm">
+                <div class="card-body">
 
-            <div class="card-body">
+                    <h6 class="card-title text-semi-bold">
 
-                <h6 class="card-title text-semi-bold">
+                        <i class="fas fa-info-circle mr-1"></i>Sobre
 
-                    <i class="fas fa-map-marker-alt mr-1"></i>Endereço
+                    </h6>
 
-                </h6>
+                    <ul class="list-unstyled">
 
-                <ul class="list-unstyled text-break mb-0">
+                        <li class="media">
 
-                    <li class="media mb-2">
+                            <div class="media-body">
 
-                        <i class="far fa-map align-top mr-2 mt-1"></i>
+                                <h6 class="mt-0 mb-1">
 
-                        <div class="media-body">
+                                    <i class="fas fa-restroom mr-1"></i>Autor
 
-                            asd asd, asd asd/asd asd, asd asd, asd asd, asd, asd asd
-                        </div>
+                                </h6>
 
-                    </li>
+                                <p>
 
-                </ul>
+                                    <?php echo utf8_encode(@(string)$resultConfiguration->author)?>
 
-            </div>
+                                </p>
 
-        </div>
+                            </div>
 
-    </div>
+                        </li>
 
-    <div class="col-md-4 d-flex mb-1">
+                        <li class="media">
 
-        <div class="card w-100 shadow-sm">
+                            <div class="media-body">
 
-            <div class="card-body">
+                                <h6 class="mt-0 mb-1">
 
-                <h6 class="card-title text-semi-bold">
+                                    <i class="fas fa-restroom mr-1"></i>Copyrigth
 
-                    <i class="far fa-clock mr-1"></i>Valores
+                                </h6>
 
-                </h6>
+                                <p>
 
-                <ul class="list-unstyled">
+                                    <?php echo utf8_encode(@(string)$resultConfiguration->copyright)?>
 
-                    <li class="media">
+                                </p>
 
-                        <div class="media-body">
+                            </div>
 
-                            <h6 class="mt-0 mb-1">
+                        </li>
 
-                                <i class="fas fa-dollar-sign mr-1"></i>Percentual ISS
+                    </ul>
 
-                            </h6>
-
-                            <p>
-
-                                5%
-
-                            </p>
-
-                        </div>
-
-                    </li>
-
-                    <li class="media">
-
-                        <div class="media-body">
-
-                            <h6 class="mt-0 mb-1">
-
-                                <i class="fas fa-dollar-sign mr-1"></i>Fundos Estaduais
-
-                            </h6>
-
-                            <p>
-
-                                45%
-
-                            </p>
-
-                        </div>
-
-                    </li>
-
-                </ul>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+    <?php }?>
 
 </div>

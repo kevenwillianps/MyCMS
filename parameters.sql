@@ -1,3 +1,16 @@
+CREATE TABLE configurations (
+  configuration_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title         VARCHAR(121) NOT NULL,
+  copyright         VARCHAR(121) NOT NULL,
+  author         VARCHAR(121) NOT NULL,
+  description   longtext     NOT NULL,
+  keywords    longtext     NOT NULL,
+  preferences    longtext     NOT NULL,
+  history      longtext     NOT NULL,
+  date         TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
+)  ENGINE = innodb;
+
+
 CREATE TABLE users (
   user_id    INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name_first VARCHAR(121) NOT NULL,
@@ -55,7 +68,7 @@ CREATE TABLE contents (
   description         VARCHAR(121) NOT NULL,
   content_resume      VARCHAR(321) NOT NULL,
   content_complete    LONGTEXT,
-  visited             INT(11)      NOT NULL,
+  keywords    LONGTEXT,
   date_start          VARCHAR(121),
   date_closing        VARCHAR(121),
   history             longtext     NOT NULL,
@@ -98,7 +111,7 @@ CREATE TABLE contents_subs (
   description      VARCHAR(121) NOT NULL,
   content_resume   VARCHAR(321) NOT NULL,
   content_complete LONGTEXT,
-  visited          INT(11)      NOT NULL,
+  keywords    LONGTEXT,
   date_start       VARCHAR(121),
   date_closing     VARCHAR(121),
   history          longtext     NOT NULL,
