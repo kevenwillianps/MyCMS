@@ -2,45 +2,58 @@
 
     /** Importação de classes */
     use \vendor\model\Main;
-    use \vendor\model\GUsuario;
-    use \vendor\controller\GUsuario\GUsuarioValidate;
-    use vendor\model\GConfig;
+    use \vendor\model\Users;
+    use \vendor\controller\users\UsersValidate;
 
     /** Instânciamento de classes */
     $Main = new Main();
-    $GUsuario = new GUsuario;
-    $GUsuarioValidate = new GUsuarioValidate();
-    $GConfig = new GConfig();
+    $Users = new Users();
+    $UsersValidate = new UsersValidate();
 
     /** Operações */
     $Main->SessionStart();
 
-    /** Busco o parâmetro de preferencias */
-    $resultGConfig = json_decode(base64_decode($GConfig->Get(0, 'PREFERENCIAS', 'PREFERENCIAS')->TEXTO));
-
     /** Tratamento dos dados de entrada */
-    $GUsuarioValidate->setUsuarioId(@(int)$_SESSION['USUARIO_ID']);
+    $UsersValidate->setUserId(@(int)$_SESSION['USER_ID']);
 
     /** Busca de registro */
-    $resultUsuario = $GUsuario->Get($GUsuarioValidate->getUsuarioId());
-
-    /** Defino o Local Onde Irá Salvar o Arquivo do Carrinho de Compras */
-    $file = $resultGConfig->path_file_log . md5($resultUsuario->USUARIO_ID) . '.json';
-
-    /** Verifico se o arquivo existe */
-    if (is_file($file))
-    {
-
-        /** Carrego os Itens já Existentes */
-        $history = json_decode(file_get_contents($file), TRUE);
-
-    }
+    $resultUsers = $Users->Get($UsersValidate->getUserId());
 
 ?>
 
+<div class="row animate slideIn">
+
+    <div class="col-md-6">
+
+        <h5 class="card-title">
+
+            <strong>
+
+                <i class="fas fa-users mr-1"></i>Usuários
+
+            </strong>
+
+            /Perfil/
+
+        </h5>
+
+    </div>
+
+    <div class="col-md-6 text-right">
+
+        <a type="button" class="btn btn-primary btn-sm" onclick="request('FOLDER=VIEW&PRODUCT=GR&TABLE=GUSUARIO&ACTION=G_USUARIO_FORM')">
+
+            <i class="fas fa-pencil-alt mr-1"></i>Editar
+
+        </a>
+
+    </div>
+
+</div>
+
 <div class="bg-white shadow-sm rounded overflow-hidden animate slideIn border">
 
-    <div class="px-4 pt-0 pb-4 cover" style="background-image: url('./image/desert.png')">
+    <div class="px-4 pt-0 pb-4 cover" style="background-image: url('./image/profile_cover.jpg')">
 
         <div class="media align-items-end profile-head">
 
@@ -61,10 +74,10 @@
                 <?php
 
                 /** Verifico se a imagem esta preenchida */
-                if (empty(@(string)$resultUsuario->FOTO))
+                if (empty(@(string)$resultUsers->FOTO))
                 { ?>
 
-                    <img src="image/astronaut.png" alt="keven" width="130" class="rounded mb-2 img-thumbnail">
+                    <img src="image/profile_perfil.png" alt="keven" width="130" class="rounded mb-2 img-thumbnail">
 
                 <?php }else{ ?>
 
@@ -86,13 +99,13 @@
 
                 <h4 class="mt-0 mb-0">
 
-                    <?php echo utf8_encode($resultUsuario->NOME_COMPLETO)?> - <?php echo utf8_encode($resultUsuario->FUNCAO)?>
+                    <?php echo utf8_encode(@(string)$resultUsers->name_first)?> <?php echo utf8_encode(@(string)$resultUsers->name_last)?> - <i class="fas fa-birthday-cake mr-1"></i><?php echo utf8_encode(date('d/m/Y', @(string)$resultUsers->date_birth))?>
 
                 </h4>
 
                 <p class="mb-4">
 
-                    @<?php echo utf8_encode($resultUsuario->LOGIN)?> - <cite><?php echo utf8_encode($resultUsuario->EMAIL)?></cite>
+                    <cite><i class="fas fa-at mr-1"></i><?php echo utf8_encode(@(string)$resultUsers->email)?></cite>
 
                 </p>
 
@@ -120,38 +133,6 @@
 
             </li>
 
-            <li class="list-inline-item">
-
-                <h5 class="font-weight-bold mb-0 d-block">745</h5>
-
-                <small class="text-muted">
-
-                    <i class="fas fa-user mr-1"></i>
-
-                    Atendimentos
-
-                </small>
-
-            </li>
-
-            <li class="list-inline-item">
-
-                <h5 class="font-weight-bold mb-0 d-block">
-
-                    340
-
-                </h5>
-
-                <small class="text-muted">
-
-                    <i class="fas fa-user mr-1"></i>
-
-                    Posição
-
-                </small>
-
-            </li>
-
         </ul>
 
     </div>
@@ -172,8 +153,8 @@
 
                     <?php
 
-                    /** Listo os acessos realizados */
-                    foreach ($history as $keyResultHistory => $resultHistory)
+                    /** Listagem de Itens */
+                    foreach (json_decode($resultUsers->history, true) as $keyResult => $result)
                     { ?>
 
                         <div class="vertical-timeline-item vertical-timeline-element">
@@ -182,7 +163,7 @@
 
                                 <span class="vertical-timeline-element-icon bounce-in">
 
-                                    <i class="badge badge-dot badge-dot-xl <?php echo @(string)$resultHistory['class']?>"> </i>
+                                    <i class="badge badge-dot badge-dot-xl <?php echo @(string)$result['class']?>"> </i>
 
                                 </span>
 
@@ -190,33 +171,19 @@
 
                                     <h4 class="timeline-title">
 
-                                        <?php echo @(string)$resultHistory['title']?>
+                                        <?php echo @(string)$result['title']?>
 
                                     </h4>
 
                                     <p>
 
-                                        <?php echo @(string)$resultHistory['description']?>
-
-                                        <a href="javascript:void(0);" data-abc="true">
-
-                                            <?php echo @(string)$resultHistory['date']?>
-
-                                        </a>
-
-                                        no seguinte IP
-
-                                        <a href="javascript:void(0);" data-abc="true">
-
-                                            <?php echo @(string)$resultHistory['ip']?>
-
-                                        </a>
+                                        <?php echo @(string)$result['description']?>, <?php echo date('h:m:s', strtotime(@(string)$result['time']))?>
 
                                     </p>
 
                                     <span class="vertical-timeline-element-date">
 
-                                        <?php echo @(string)$resultHistory['time']?>
+                                        <?php echo date('d/m/y', strtotime(@(string)$result['date']))?>
 
                                     </span>
 

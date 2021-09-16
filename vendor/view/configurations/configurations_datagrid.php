@@ -99,7 +99,11 @@ $resultConfiguration = $Configurations->All();
 
                     <h5 class="card-title">
 
-                        <?php echo utf8_encode(@(string)$resultConfiguration->title)?>
+                        <strong>
+
+                            <?php echo utf8_encode(@(string)$resultConfiguration->title)?>
+
+                        </strong>
 
                     </h5>
 

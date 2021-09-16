@@ -34,7 +34,7 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DATAGRID')">
+                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_PROFILE')">
 
                         <i class="far fa-user-circle mr-1"></i><?php echo utf8_encode(ucwords(strtolower(@(string)$_SESSION['USER_NAME_FIRST'])))?>
 
