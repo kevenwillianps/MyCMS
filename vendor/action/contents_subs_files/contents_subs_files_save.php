@@ -2,6 +2,7 @@
 
 /** Importação de classes */
 use \vendor\model\Main;
+use \vendor\model\Configurations;
 use \vendor\controller\File\File;
 use \vendor\controller\File\FileValidate;
 use \vendor\model\ContentsSubs;
@@ -10,7 +11,9 @@ use \vendor\controller\contents_subs_files\ContentsSubsFilesValidaTe;
 
 /** Instânciamento de classes */
 $Main = new Main();
+$File = new File();
 $FileValidate = new FileValidate();
+$Configurations = new Configurations();
 $ContentsSubs = new ContentsSubs();
 $ContentsSubsFiles = new ContentsSubsFiles();
 $ContentsSubsFilesValidaTe = new ContentsSubsFilesValidaTe();
@@ -22,21 +25,30 @@ $result = array();
 try
 {
 
+    /** Busco a configuração */
+    $resultConfiguration = $Configurations->All();
+
+    /** Decodifico as preferencias */
+    $resultConfiguration->preferences = (object)json_decode(base64_decode($resultConfiguration->preferences));
+
     /** Operações */
     $Main->SessionStart();
 
-    /** Parâmetros de entrada */
+    /** Parâmetros de entrada - Arquivos*/
+    $FileValidate->setName(@(string)$_POST['descricao']);
+    $FileValidate->setBase64(@(string)$_POST['arquivo']);
+    $FileValidate->setPonteiro(@(int)$_POST['ponteiro']);
+    $FileValidate->setTamanho(@(int)$_POST['tamanho']);
+
+    /** Parâmetros de entrada - ContentSub*/
     $ContentsSubsFilesValidaTe->setContentSubFileId(@(int)$_POST['content_sub_file_id']);
     $ContentsSubsFilesValidaTe->setContentSubId(@(int)$_POST['content_sub_id']);
     $ContentsSubsFilesValidaTe->setHighlighterId(@(int)$_POST['highlighter_id']);
     $ContentsSubsFilesValidaTe->setSituationId(@(int)$_POST['situation_id']);
     $ContentsSubsFilesValidaTe->setUserId(@(int)$_SESSION['USER_ID']);
     $ContentsSubsFilesValidaTe->setPositionContent(@(int)$_POST['situation_id']);
-
-    $FileValidate->setName(@(string)$_POST['descricao']);
-    $FileValidate->setBase64(@(string)$_POST['arquivo']);
-    $FileValidate->setPonteiro(@(int)$_POST['ponteiro']);
-    $FileValidate->setTamanho(@(int)$_POST['tamanho']);
+    $ContentsSubsFilesValidaTe->setName($resultConfiguration->preferences->file_name . $FileValidate->getName());
+    $ContentsSubsFilesValidaTe->setPath($resultConfiguration->preferences->file_path_contents_subs . $ContentsSubsFilesValidaTe->getContentSubId());
 
     /** Verifico a existência de erros */
     if (!empty($FileValidate->getErrors()))
@@ -62,25 +74,19 @@ try
         if (@(int)$resultContentSub->content_sub_id > 0)
         {
 
-            /** Instânciamento de classes */
-            $File = new File('Product/Version/Release/' . $ContentsSubsFilesValidaTe->getContentSubId());
-
             /** Verifico se é a última parte */
             if ((int)$FileValidate->getPonteiro() === ((int)$FileValidate->getTamanho() - 1))
             {
 
-                $ContentsSubsFilesValidaTe->setName($FileValidate->getName());
-                $ContentsSubsFilesValidaTe->setPath($File->path($FileValidate->getName()));
-
                 /** Gero o arquivo */
-                $File->generate($FileValidate->getName(), $FileValidate->getBase64());
+                $File->generate($ContentsSubsFilesValidaTe->getPath(), $ContentsSubsFilesValidaTe->getName(), $FileValidate->getBase64());
 
                 /** Verifico se o caminho existe */
-                if (is_file($File->path($FileValidate->getName())))
+                if (is_file($ContentsSubsFilesValidaTe->getFullPath()))
                 {
 
                     /** Salvo o registro do arquivo */
-                    if ($ContentsSubsFiles->Save($ContentsSubsFilesValidaTe->getContentSubFileId(), $ContentsSubsFilesValidaTe->getContentSubId(), $ContentsSubsFilesValidaTe->getHighlighterId(), $ContentsSubsFilesValidaTe->getSituationId(), $ContentsSubsFilesValidaTe->getUserId(), $ContentsSubsFilesValidaTe->getPositionContent(), $ContentsSubsFilesValidaTe->getName(), $ContentsSubsFilesValidaTe->getPath()))
+                    if ($ContentsSubsFiles->Save($ContentsSubsFilesValidaTe->getContentSubFileId(), $ContentsSubsFilesValidaTe->getContentSubId(), $ContentsSubsFilesValidaTe->getHighlighterId(), $ContentsSubsFilesValidaTe->getSituationId(), $ContentsSubsFilesValidaTe->getUserId(), $ContentsSubsFilesValidaTe->getPositionContent(), $ContentsSubsFilesValidaTe->getName(), $ContentsSubsFilesValidaTe->getFullPath()))
                     {
 
                         /** Adição de elementos na array */
@@ -137,7 +143,7 @@ try
             {
 
                 /** Gero o arquivo */
-                $File->generate($FileValidate->getName(), $FileValidate->getBase64());
+                $File->generate($ContentsSubsFilesValidaTe->getPath(), $ContentsSubsFilesValidaTe->getName(), $FileValidate->getBase64());
 
                 /** Adição de elementos na array */
                 $message = 'Parte inserida com sucesso';

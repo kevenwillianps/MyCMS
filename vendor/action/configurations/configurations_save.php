@@ -12,6 +12,7 @@ $ConfigurationsValidate = new ConfigurationsValidate();
 $message = null;
 $result = array();
 $history = array();
+$preferences = array();
 
 try {
 
@@ -22,8 +23,30 @@ try {
     $ConfigurationsValidate->setAuthor(@(string)$_POST['author']);
     $ConfigurationsValidate->setDescription(@(string)$_POST['description']);
     $ConfigurationsValidate->setKeywords(@(string)$_POST['keywords']);
-    $ConfigurationsValidate->setPreferences(@(string)$_POST['preferences']);
     $ConfigurationsValidate->setHistory(@(string)$_POST['history']);
+
+    /** Preferencias - Arquivos */
+    $preferences['file_path_contents'] = @(string)$_POST['file_path_contents'];
+    $preferences['file_path_contents_subs'] = @(string)$_POST['file_path_contents_subs'];
+    $preferences['file_name'] = @(string)$_POST['file_name'];
+
+    /** Preferencias - Imagens Dimensões - Redimensionado */
+    $preferences['file_resize_height'] = @(string)$_POST['file_resize_height'];
+    $preferences['file_resize_width'] = @(string)$_POST['file_resize_width'];
+    $preferences['file_resize_quality'] = @(string)$_POST['file_resize_quality'];
+
+    /** Preferencias - Imagens Dimensões - Miniatura */
+    $preferences['file_thumbnail_height'] = @(string)$_POST['file_thumbnail_height'];
+    $preferences['file_thumbnail_width'] = @(string)$_POST['file_thumbnail_width'];
+    $preferences['file_thumbnail_quality'] = @(string)$_POST['file_thumbnail_quality'];
+
+    /** Preferencias - Imagens Dimensões - Perfil */
+    $preferences['file_profile_height'] = @(string)$_POST['file_profile_height'];
+    $preferences['file_profile_width'] = @(string)$_POST['file_profile_width'];
+    $preferences['file_profile_quality'] = @(string)$_POST['file_profile_quality'];
+
+    /** Parâmetro de entrada */
+    $ConfigurationsValidate->setPreferences(base64_encode(json_encode($preferences, JSON_PRETTY_PRINT)));
 
     /** Verifico o tipo de histórico */
     if ($ConfigurationsValidate->getHistory() > 0) {

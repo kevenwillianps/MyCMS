@@ -9,6 +9,9 @@ $Configurations = new Configurations();
 /** Busco a configuração */
 $resultConfiguration = $Configurations->All();
 
+/** Decodifico as preferencias */
+$resultConfiguration->preferences = (object)json_decode(base64_decode($resultConfiguration->preferences));
+
 ?>
 
 <div class="row mt-3 animate slideIn">
@@ -91,7 +94,7 @@ $resultConfiguration = $Configurations->All();
 
     <?php }else{ ?>
 
-        <div class="col-md-12 my-1">
+        <div class="col-md-12 mt-1 mb-3">
 
             <div class="card shadow-sm">
 
@@ -119,7 +122,7 @@ $resultConfiguration = $Configurations->All();
 
         </div>
 
-        <div class="col-md-4 d-flex mb-1">
+        <div class="col-md-4 d-flex">
 
             <div class="card shadow-sm w-100">
 
@@ -139,7 +142,7 @@ $resultConfiguration = $Configurations->All();
 
                                 <h6 class="mt-0 mb-1">
 
-                                    <i class="fas fa-restroom mr-1"></i>Autor
+                                    <i class="fas fa-at mr-1"></i>Autor
 
                                 </h6>
 
@@ -157,15 +160,57 @@ $resultConfiguration = $Configurations->All();
 
                             <div class="media-body">
 
-                                <h6 class="mt-0 mb-1">
+                                <h6 class="mt-0">
 
-                                    <i class="fas fa-restroom mr-1"></i>Copyrigth
+                                    <i class="far fa-copyright mr-1"></i>Copyrigth
 
                                 </h6>
 
                                 <p>
 
                                     <?php echo utf8_encode(@(string)$resultConfiguration->copyright)?>
+
+                                </p>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 d-flex">
+
+            <div class="card shadow-sm w-100">
+
+                <div class="card-body">
+
+                    <h6 class="card-title text-semi-bold">
+
+                        <i class="fas fa-info-circle mr-1"></i>Configurações
+
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li class="media">
+
+                            <div class="media-body">
+
+                                <h6 class="mt-0 mb-1">
+
+                                    <i class="far fa-folder mr-1"></i>Caminho das Imagens
+
+                                </h6>
+
+                                <p>
+
+                                    <?php echo utf8_encode(@(string)$resultConfiguration->preferences->file_path)?>
 
                                 </p>
 

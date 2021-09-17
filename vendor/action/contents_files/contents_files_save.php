@@ -2,6 +2,7 @@
 
 /** Importação de classes */
 use \vendor\model\Main;
+use \vendor\model\Configurations;
 use \vendor\controller\File\File;
 use \vendor\controller\File\FileValidate;
 use \vendor\model\Contents;
@@ -10,32 +11,44 @@ use \vendor\controller\contents_files\ContentsFilesValidade;
 
 /** Instânciamento de classes */
 $Main = new Main();
+$Configurations = new Configurations();
+$File = new File();
 $FileValidate = new FileValidate();
 $Contents = new Contents();
 $ContentsFiles = new ContentsFiles();
 $ContentsFilesValidate = new ContentsFilesValidade();
 
+/** Controle de mensagens */
+$message = null;
+$result = array();
+
 try
 {
+
+    /** Busco a configuração */
+    $resultConfiguration = $Configurations->All();
+
+    /** Decodifico as preferencias */
+    $resultConfiguration->preferences = (object)json_decode(base64_decode($resultConfiguration->preferences));
 
     /** Operações */
     $Main->SessionStart();
 
-    /** Parâmetros de entrada */
+    /** Parâmetros de entrada Arquivo */
+    $FileValidate->setName(@(string)$_POST['descricao']);
+    $FileValidate->setBase64(@(string)$_POST['arquivo']);
+    $FileValidate->setPonteiro(@(int)$_POST['ponteiro']);
+    $FileValidate->setTamanho(@(int)$_POST['tamanho']);
+
+    /** Parâmetros de entrada Contents */
     $ContentsFilesValidate->setContentFileId(@(int)$_POST['content_file_id']);
     $ContentsFilesValidate->setContentId(@(int)$_POST['content_id']);
     $ContentsFilesValidate->setHighlighterId(@(int)$_POST['highlighter_id']);
     $ContentsFilesValidate->setSituationId(@(int)$_POST['situation_id']);
     $ContentsFilesValidate->setUserId(@(int)$_SESSION['USER_ID']);
     $ContentsFilesValidate->setPositionContent(@(int)$_POST['situation_id']);
-
-    $FileValidate->setName(@(string)$_POST['descricao']);
-    $FileValidate->setBase64(@(string)$_POST['arquivo']);
-    $FileValidate->setPonteiro(@(int)$_POST['ponteiro']);
-    $FileValidate->setTamanho(@(int)$_POST['tamanho']);
-
-    /** Controle de mensagens */
-    $message = Array();
+    $ContentsFilesValidate->setName($resultConfiguration->preferences->file_name . $FileValidate->getName());
+    $ContentsFilesValidate->setPath($resultConfiguration->preferences->file_path_contents . $ContentsFilesValidate->getContentId());
 
     /** Verifico a existência de erros */
     if (!empty($FileValidate->getErrors()))
@@ -61,25 +74,22 @@ try
         if (@(int)$resultContent->content_id > 0)
         {
 
-            /** Instânciamento de classes */
-            $File = new File('Product/Version/Release/' . $ContentsFilesValidate->getContentId());
-
             /** Verifico se é a última parte */
             if ((int)$FileValidate->getPonteiro() === ((int)$FileValidate->getTamanho() - 1))
             {
 
-                $ContentsFilesValidate->setName($FileValidate->getName());
-                $ContentsFilesValidate->setPath($File->path($FileValidate->getName()));
-
                 /** Gero o arquivo */
-                $File->generate($FileValidate->getName(), $FileValidate->getBase64());
+                $File->generate($ContentsFilesValidate->getPath(), $ContentsFilesValidate->getName(), $FileValidate->getBase64());
 
                 /** Verifico se o caminho existe */
-                if (is_file($File->path($FileValidate->getName())))
+                if (is_file($ContentsFilesValidate->getFullPath()))
                 {
 
+                    /** Manipulo as imagens */
+                    $File->handling($ContentsFilesValidate->getFullPath(), $resultConfiguration->preferences);
+
                     /** Salvo o registro do arquivo */
-                    if ($ContentsFiles->Save($ContentsFilesValidate->getContentFileId(), $ContentsFilesValidate->getContentId(), $ContentsFilesValidate->getHighlighterId(), $ContentsFilesValidate->getSituationId(), $ContentsFilesValidate->getUserId(), $ContentsFilesValidate->getPositionContent(), $ContentsFilesValidate->getName(), $ContentsFilesValidate->getPath()))
+                    if ($ContentsFiles->Save($ContentsFilesValidate->getContentFileId(), $ContentsFilesValidate->getContentId(), $ContentsFilesValidate->getHighlighterId(), $ContentsFilesValidate->getSituationId(), $ContentsFilesValidate->getUserId(), $ContentsFilesValidate->getPositionContent(), $ContentsFilesValidate->getName(), $ContentsFilesValidate->getFullPath()))
                     {
 
                         /** Adição de elementos na array */
@@ -136,7 +146,7 @@ try
             {
 
                 /** Gero o arquivo */
-                $File->generate($FileValidate->getName(), $FileValidate->getBase64());
+                $File->generate($ContentsFilesValidate->getPath(), $ContentsFilesValidate->getName(), $FileValidate->getBase64());
 
                 /** Adição de elementos na array */
                 $message = 'Parte inserida com sucesso';

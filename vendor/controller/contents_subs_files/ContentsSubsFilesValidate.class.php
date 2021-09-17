@@ -200,6 +200,14 @@ class ContentsSubsFilesValidaTe
 
     }
 
+    public function getFullPath(): string
+    {
+
+        /** Retorno da informação */
+        return (string)$this->path . '/' . (string)$this->name;
+
+    }
+
     public function getErrors(): string
     {
 

@@ -22,7 +22,6 @@ class ContentsFilesValidade
     private $positionContent = null;
     private $name = null;
     private $path = null;
-    private $date = null;
 
     /** Método construtor */
     public function __construct()
@@ -198,6 +197,14 @@ class ContentsFilesValidade
 
         /** Retorno da informação */
         return (string)$this->path;
+
+    }
+
+    public function getFullPath(): string
+    {
+
+        /** Retorno da informação */
+        return (string)$this->path . '/' . (string)$this->name;
 
     }
 

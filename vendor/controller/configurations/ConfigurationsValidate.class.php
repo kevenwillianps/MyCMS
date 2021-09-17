@@ -193,7 +193,7 @@ class ConfigurationsValidate
     {
 
         /** Retorno da informação */
-        return $this->preferences;
+        return (string)$this->preferences;
 
     }
 

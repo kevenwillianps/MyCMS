@@ -27,7 +27,7 @@ function prepareUploadFile(origin) {
         fileReader.readAsDataURL($(origin)[0].files[i]);
 
         /** Pego o nome real do arquivo */
-        inputs_file.descricao.push('mycms_' + (btoa(Math.random() * 10000)) + '.' + ($(origin)[0].files[i].name.substring($(origin)[0].files[i].name.indexOf('.') + 1)));
+        inputs_file.descricao.push(btoa(Math.random() * 10000) + '.' + ($(origin)[0].files[i].name.substring($(origin)[0].files[i].name.indexOf('.') + 1)));
 
         /** Trasnformar o arquivo em base64 */
         fileReader.onload = (e) => {
