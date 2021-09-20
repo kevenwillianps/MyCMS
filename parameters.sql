@@ -92,7 +92,7 @@ CREATE TABLE contents_files (
   date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (situation_id) REFERENCES situations (situation_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id),
-  FOREIGN KEY (content_id) REFERENCES contents (content_id),
+  FOREIGN KEY (content_id) REFERENCES contents (content_id) ON DELETE CASCADE,
   FOREIGN KEY (highlighter_id) REFERENCES highlighters (highlighter_id)
 )
   ENGINE = innodb;
@@ -136,7 +136,7 @@ CREATE TABLE contents_subs_files (
   date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (situation_id) REFERENCES situations (situation_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id),
-  FOREIGN KEY (content_sub_id) REFERENCES contents_subs (content_sub_id),
+  FOREIGN KEY (content_sub_id) REFERENCES contents_subs (content_sub_id) ON DELETE CASCADE,
   FOREIGN KEY (highlighter_id) REFERENCES highlighters (highlighter_id)
 )
   ENGINE = innodb;

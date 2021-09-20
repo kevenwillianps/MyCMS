@@ -21,22 +21,22 @@ try {
     $Main->SessionStart();
 
     /** Parâmetros de entrada */
-    $ContentsValidade->setContentId(@(int)$_POST['content_id']);
-    $ContentsValidade->setContentCategoryId(@(int)$_POST['content_category_id']);
-    $ContentsValidade->setHighlighters(@(int)$_POST['highlighter_id']);
-    $ContentsValidade->setSituationId(@(int)$_POST['situation_id']);
+    $ContentsValidade->setContentId(@(int)filter_input(INPUT_POST, 'content_id', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setContentCategoryId(@(int)filter_input(INPUT_POST, 'content_category_id', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setHighlighters(@(int)filter_input(INPUT_POST, 'highlighter_id', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setSituationId(@(int)filter_input(INPUT_POST, 'situation_id', FILTER_SANITIZE_STRING));
     $ContentsValidade->setUserId(@(int)$_SESSION['USER_ID']);
-    $ContentsValidade->setPositionContent(@(int)$_POST['position_content']);
-    $ContentsValidade->setPositionMenu(@(int)$_POST['position_menu']);
-    $ContentsValidade->setUrl(@(string)$_POST['url']);
-    $ContentsValidade->setTitle(@(string)$_POST['title']);
-    $ContentsValidade->setTitleMenu(@(string)$_POST['title_menu']);
-    $ContentsValidade->setDescription(@(string)$_POST['description']);
-    $ContentsValidade->setContentResume(@(string)$_POST['content_resume']);
-    $ContentsValidade->setContentComplete(@(string)$_POST['content_complete']);
-    $ContentsValidade->setKeywords(@(string)$_POST['keywords']);
-    $ContentsValidade->setDateStart(@(string)$_POST['date_start']);
-    $ContentsValidade->setDateClosing(@(string)$_POST['date_closing']);
+    $ContentsValidade->setPositionContent(@(int)filter_input(INPUT_POST, 'position_content', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setPositionMenu(@(int)filter_input(INPUT_POST, 'position_menu', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setUrl(@(string)filter_input(INPUT_POST, 'url', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setTitle(@(string)filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setTitleMenu(@(string)filter_input(INPUT_POST, 'title_menu', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setDescription(@(string)filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setContentResume(@(string)filter_input(INPUT_POST, 'content_resume', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setContentComplete(@(string)filter_input(INPUT_POST, 'content_complete', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setKeywords(@(string)filter_input(INPUT_POST, 'keywords', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setDateStart(@(string)filter_input(INPUT_POST, 'date_start', FILTER_SANITIZE_STRING));
+    $ContentsValidade->setDateClosing(@(string)filter_input(INPUT_POST, 'date_closing', FILTER_SANITIZE_STRING));
 
     /** Verifico o tipo de histórico */
     if ($ContentsValidade->getContentId() > 0) {

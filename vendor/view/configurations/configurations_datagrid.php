@@ -122,7 +122,7 @@ $resultConfiguration->preferences = (object)json_decode(base64_decode($resultCon
 
         </div>
 
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 d-flex">
 
             <div class="card shadow-sm w-100">
 
@@ -184,7 +184,7 @@ $resultConfiguration->preferences = (object)json_decode(base64_decode($resultCon
 
         </div>
 
-        <div class="col-md-4 d-flex">
+        <div class="col-md-6 d-flex">
 
             <div class="card shadow-sm w-100">
 

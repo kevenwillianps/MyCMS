@@ -16,20 +16,6 @@
 
         <div class="collapse navbar-collapse">
 
-            <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item">
-
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_DATAGRID')">
-
-                        <i class="fas fa-cog mr-1"></i>Configurações
-
-                    </a>
-
-                </li>
-
-            </ul>
-
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
@@ -63,6 +49,32 @@
         <div class="collapse navbar-collapse">
 
             <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <i class="fas fa-cog mr-1"></i>Configurações
+
+                    </a>
+
+                    <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_DATAGRID')">
+
+                            Empresa
+
+                        </a>
+
+                        <a class="dropdown-item" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_IMAGE_PREFERENCE_DATAGRID')">
+
+                            Imagens
+
+                        </a>
+
+                    </div>
+
+                </li>
 
                 <li class="nav-item">
 
