@@ -82,16 +82,19 @@ class File{
     {
 
         /** Parâmetros de entrada **/
-        $this->path = (string)$path;
-        $this->name = (string)$name;
-        $this->preferences = (array)$preferences;
+        $this->path = $path;
+        $this->name = $name;
+        $this->preferences = $preferences;
 
         /** Listagem de Todos os Registros */
         foreach ($this->preferences as $keyPreference => $preference)
         {
 
+            /** Pego a extensão do arquivo */
+            $extension = pathinfo($this->path . '/' . $preference->name . '/' . $this->name, PATHINFO_EXTENSION);
+
             /** Verifico se já existe alguma pasta */
-            if (!is_dir($this->path))
+            if (!is_dir($this->path . '/' . $preference->name))
             {
 
                 /** Crio o caminho **/
@@ -100,10 +103,10 @@ class File{
             }
 
             /** Corto a imagem para icone **/
-            $this->wideImage = \WideImage::load($path);
+            $this->wideImage = \WideImage::load($this->path . '/' . $this->name);
             $this->wideImage = $this->wideImage->resize($preference->width, $preference->height, 'outside');
             $this->wideImage = $this->wideImage->crop('center', 'center', $preference->width, $preference->height);
-            $this->wideImage = $this->wideImage->saveToFile($this->path . '/' . $preference->name . $this->name,  $preference->quality);
+            $this->wideImage = $this->wideImage->saveToFile($this->path . '/' . $preference->name . '/' . $this->name, ($extension === 'png' ? $preference->quality_png : $preference->quality_jpg));
 
         }
 

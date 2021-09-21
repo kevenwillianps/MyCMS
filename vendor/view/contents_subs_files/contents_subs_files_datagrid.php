@@ -89,7 +89,7 @@ $resultContentSub = $ContentsSubs->Get(@(int)$_POST['CONTENT_SUB_ID']);
 
                 <form role="form" id="formContentFileDelete_<?php echo utf8_encode(@(int)$keyResultContentsSubsFiles)?>" class="card shadow-sm">
 
-                    <img src="<?php echo utf8_encode(@(string)$resultContentsSubsFiles->path)?>" class="card-img-top" alt="...">
+                    <img src="<?php echo utf8_encode(@(string)$resultContentsSubsFiles->path)?>/<?php echo utf8_encode(@(string)$resultContentsSubsFiles->name)?>" class="card-img-top" title="<?php echo utf8_encode(@(string)$resultContentsSubsFiles->name)?>" alt="<?php echo utf8_encode(@(string)$resultContentsSubsFiles->name)?>">
 
                     <div class="card-body">
 

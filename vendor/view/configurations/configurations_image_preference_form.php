@@ -46,7 +46,7 @@
 
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md">
 
                 <div class="form-group">
 
@@ -56,13 +56,13 @@
 
                     </label>
 
-                    <input type="text" class="form-control" id="name" name="name" value="<?php echo utf8_encode(@(int)$resultConfiguration->preferences->name)?>">
+                    <input type="text" class="form-control" id="name" name="name" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->name)?>">
 
                 </div>
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md">
 
                 <div class="form-group">
 
@@ -78,7 +78,7 @@
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md">
 
                 <div class="form-group">
 
@@ -94,17 +94,33 @@
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md">
 
                 <div class="form-group">
 
-                    <label for="quality">
+                    <label for="quality_jpg">
 
-                        Qualidade:
+                        Qualidade <strong>JPG</strong>:
 
                     </label>
 
-                    <input type="number" class="form-control" id="quality" name="quality" value="<?php echo utf8_encode(@(int)$resultConfiguration->preferences->quality)?>">
+                    <input type="number" class="form-control" id="quality_jpg" name="quality_jpg" value="<?php echo utf8_encode(@(int)$resultConfiguration->preferences->quality_jpg)?>">
+
+                </div>
+
+            </div>
+
+            <div class="col-md">
+
+                <div class="form-group">
+
+                    <label for="quality_png">
+
+                        Qualidade <strong>PNG</strong>:
+
+                    </label>
+
+                    <input type="number" class="form-control" id="quality_png" name="quality_png" value="<?php echo utf8_encode(@(int)$resultConfiguration->preferences->quality_png)?>">
 
                 </div>
 

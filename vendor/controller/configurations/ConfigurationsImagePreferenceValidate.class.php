@@ -18,7 +18,8 @@ class ConfigurationsImagePreferenceValidate
     private $name = null;
     private $width = null;
     private $height = null;
-    private $quality = null;
+    private $qualityJpg = null;
+    private $qualityPng = null;
 
     /** Método construtor */
     public function __construct()
@@ -57,10 +58,17 @@ class ConfigurationsImagePreferenceValidate
 
     }
 
-    public function setQuality(int $quality) : void
+    public function setQualityJpg(int $qualityJpg) : void
     {
 
-        $this->quality = isset($quality) ? $this->Main->antiInjection($quality) : null;
+        $this->qualityJpg = isset($qualityJpg) ? $this->Main->antiInjection($qualityJpg) : null;
+
+    }
+
+    public function setQualityPng(int $qualityPng) : void
+    {
+
+        $this->qualityPng = isset($qualityPng) ? $this->Main->antiInjection($qualityPng) : null;
 
     }
 
@@ -92,10 +100,17 @@ class ConfigurationsImagePreferenceValidate
 
     }
 
-    public function getQuality() : int
+    public function getQualityJpg() : int
     {
 
-        return (int)$this->quality;
+        return (int)$this->qualityJpg;
+
+    }
+
+    public function getQualityPng() : int
+    {
+
+        return (int)$this->qualityPng;
 
     }
 

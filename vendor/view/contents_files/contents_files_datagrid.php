@@ -89,7 +89,7 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
                 <form role="form" id="formContentFileDelete_<?php echo utf8_encode(@(int)$keyResultContentsFiles)?>" class="card shadow-sm">
 
-                    <img src="<?php echo utf8_encode(@(string)$resultContentsFiles->path)?>" class="card-img-top" alt="...">
+                    <img src="<?php echo utf8_encode(@(string)$resultContentsFiles->path)?>/<?php echo utf8_encode(@(string)$resultContentsFiles->name)?>" class="card-img-top" alt="...">
 
                     <div class="card-body">
 

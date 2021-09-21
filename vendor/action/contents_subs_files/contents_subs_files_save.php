@@ -85,8 +85,11 @@ try
                 if (is_file($ContentsSubsFilesValidaTe->getFullPath()))
                 {
 
+                    /** Manipulo as imagens */
+                    $File->handling($ContentsSubsFilesValidaTe->getPath(), $ContentsSubsFilesValidaTe->getName(), $resultConfiguration->preferences->images_dimensions);
+
                     /** Salvo o registro do arquivo */
-                    if ($ContentsSubsFiles->Save($ContentsSubsFilesValidaTe->getContentSubFileId(), $ContentsSubsFilesValidaTe->getContentSubId(), $ContentsSubsFilesValidaTe->getHighlighterId(), $ContentsSubsFilesValidaTe->getSituationId(), $ContentsSubsFilesValidaTe->getUserId(), $ContentsSubsFilesValidaTe->getPositionContent(), $ContentsSubsFilesValidaTe->getName(), $ContentsSubsFilesValidaTe->getFullPath()))
+                    if ($ContentsSubsFiles->Save($ContentsSubsFilesValidaTe->getContentSubFileId(), $ContentsSubsFilesValidaTe->getContentSubId(), $ContentsSubsFilesValidaTe->getHighlighterId(), $ContentsSubsFilesValidaTe->getSituationId(), $ContentsSubsFilesValidaTe->getUserId(), $ContentsSubsFilesValidaTe->getPositionContent(), $ContentsSubsFilesValidaTe->getName(), $ContentsSubsFilesValidaTe->getPath()))
                     {
 
                         /** Adição de elementos na array */

@@ -154,6 +154,54 @@
 
                     </div>
 
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+
+                            <label for="twitter_user">
+
+                                Usuário Twitter:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="twitter_user" name="twitter_user" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->twitter_user)?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+
+                            <label for="facebook_id">
+
+                                Facebook ID:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="facebook_id" name="facebook_id" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->facebook_id)?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+
+                            <label for="url">
+
+                                URL do Site:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="url" name="url" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->url)?>">
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>

@@ -23,13 +23,24 @@ try {
     $ConfigurationsValidate->setAuthor(@(string)$_POST['author']);
     $ConfigurationsValidate->setDescription(@(string)$_POST['description']);
     $ConfigurationsValidate->setKeywords(@(string)$_POST['keywords']);
-    $ConfigurationsValidate->setHistory(@(string)$_POST['history']);
+
+    /** Preferencias */
+    $preferences['file_path_contents'] = @(string)$_POST['file_path_contents'];
+    $preferences['file_path_contents_subs'] = @(string)$_POST['file_path_contents_subs'];
+    $preferences['file_name'] = @(string)$_POST['file_name'];
+    $preferences['twitter_user'] = @(string)$_POST['twitter_user'];
+    $preferences['facebook_id'] = @(string)$_POST['facebook_id'];
+    $preferences['url'] = @(string)$_POST['url'];
+    $preferences['images_dimensions'] = array();
+
+    /** Salvo o histórico do registro */
+    $ConfigurationsValidate->setPreferences(base64_encode(json_encode($preferences, JSON_PRETTY_PRINT)));
 
     /** Verifico o tipo de histórico */
-    if ($ConfigurationsValidate->getHistory() > 0) {
+    if ($ConfigurationsValidate->getConfigurationId() > 0) {
 
         /** Busco o Histórico */
-        $resultHistory = json_decode(base64_decode($Configurations->Get($ConfigurationsValidate->getHistory())->history),true);
+        $resultHistory = json_decode(base64_decode($Configurations->Get($ConfigurationsValidate->getConfigurationId())->history),true);
 
         /** Captura dos dados de login */
         $history[0]['title'] = 'Atualização';

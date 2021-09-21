@@ -10,7 +10,7 @@ $Configurations = new Configurations();
 $resultConfiguration = $Configurations->All();
 
 /** Decodifico as preferencias */
-$resultConfiguration->preferences = (array)json_decode(base64_decode($resultConfiguration->preferences));
+$resultConfiguration->preferences = (object)json_decode(base64_decode($resultConfiguration->preferences));
 
 ?>
 
@@ -45,7 +45,7 @@ $resultConfiguration->preferences = (array)json_decode(base64_decode($resultConf
     <?php
 
     /** Verifico se existem registros */
-    if (count($resultConfiguration->preferences) === 0)
+    if (count($resultConfiguration->preferences->images_dimensions) === 0)
     { ?>
 
         <div class="col-md-12">
@@ -106,12 +106,6 @@ $resultConfiguration->preferences = (array)json_decode(base64_decode($resultConf
 
                         </th>
 
-                        <th scope="col" class="text-center">
-
-                            Qualidade
-
-                        </th>
-
                     </tr>
 
                 </thead>
@@ -121,7 +115,7 @@ $resultConfiguration->preferences = (array)json_decode(base64_decode($resultConf
                 <?php
 
                 /** Listagem de Todos os Registros */
-                foreach ($resultConfiguration->preferences as $keyResult => $result)
+                foreach ($resultConfiguration->preferences->images_dimensions as $keyResult => $result)
                 { ?>
 
                     <tr class="border-top">
@@ -152,12 +146,6 @@ $resultConfiguration->preferences = (array)json_decode(base64_decode($resultConf
 
                         <td class="text-center">
 
-                            <?php echo utf8_encode(@(int)$result->quality)?>
-
-                        </td>
-
-                        <td class="text-center">
-
                             <div class="btn-group dropleft">
 
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="buttonDropdown_<?php echo utf8_encode($keyResult)?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -167,18 +155,6 @@ $resultConfiguration->preferences = (array)json_decode(base64_decode($resultConf
                                 </button>
 
                                 <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenuButton">
-
-                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_FORM&SITUATION_ID=<?php echo utf8_encode(@(int)$keyResult)?>')">
-
-                                        <span class="badge badge-primary mr-1">
-
-                                            <i class="fas fa-pencil-alt"></i>
-
-                                        </span>
-
-                                        Editar
-
-                                    </a>
 
                                     <a type="button" class="dropdown-item" onclick="sendForm('#formSituationDelete_<?php echo utf8_encode(@(int)$keyResult)?>')">
 
@@ -197,9 +173,10 @@ $resultConfiguration->preferences = (array)json_decode(base64_decode($resultConf
                                 <form role="form" id="formSituationDelete_<?php echo utf8_encode(@(int)$keyResult)?>">
 
                                     <input type="hidden" name="FOLDER" value="ACTION">
-                                    <input type="hidden" name="TABLE" value="SITUATIONS">
-                                    <input type="hidden" name="ACTION" value="SITUATIONS_DELETE">
-                                    <input type="hidden" name="situation_id" value="<?php echo utf8_encode(@(int)$keyResult)?>">
+                                    <input type="hidden" name="TABLE" value="CONFIGURATIONS">
+                                    <input type="hidden" name="ACTION" value="CONFIGURATIONS_IMAGE_PREFERENCE_DELETE">
+                                    <input type="hidden" name="configuration_id" value="<?php echo utf8_encode(@(int)$resultConfiguration->configuration_id)?>">
+                                    <input type="hidden" name="indice" value="<?php echo utf8_encode(@(int)$keyResult)?>">
 
                                 </form>
 

@@ -21,11 +21,6 @@ try {
     /** Parâmetros de entrada */
     $ConfigurationsValidate->setConfigurationId(@(int)$_POST['configuration_id']);
     $ConfigurationsImagePreferenceValidate->setIndice(@(int)$_POST['indice']);
-    $ConfigurationsImagePreferenceValidate->setName(@(string)$_POST['name']);
-    $ConfigurationsImagePreferenceValidate->setWidth(@(int)$_POST['width']);
-    $ConfigurationsImagePreferenceValidate->setHeight(@(int)$_POST['height']);
-    $ConfigurationsImagePreferenceValidate->setQualityJpg(@(int)$_POST['quality_jpg']);
-    $ConfigurationsImagePreferenceValidate->setQualityPng(@(int)$_POST['quality_png']);
 
     /** Verifico a existência de erros */
     if (!empty($ConfigurationsImagePreferenceValidate->getErrors())) {
@@ -47,15 +42,8 @@ try {
         /** Decodifico as preferencias */
         $resultConfiguration->preferences = (object)json_decode(base64_decode($resultConfiguration->preferences));
 
-        /** Defino as prefências */
-        $preferences[0]['name'] = $ConfigurationsImagePreferenceValidate->getName();
-        $preferences[0]['width'] = $ConfigurationsImagePreferenceValidate->getWidth();
-        $preferences[0]['height'] = $ConfigurationsImagePreferenceValidate->getHeight();
-        $preferences[0]['quality_jpg'] = $ConfigurationsImagePreferenceValidate->getQualityJpg();
-        $preferences[0]['quality_png'] = $ConfigurationsImagePreferenceValidate->getQualityPng();
-
-        /** Unificação de array */
-        $resultConfiguration->preferences->images_dimensions = array_merge($resultConfiguration->preferences->images_dimensions, $preferences);
+        /** Removo o Elemento */
+        unset($resultConfiguration->preferences->images_dimensions[$ConfigurationsImagePreferenceValidate->getIndice()]);
 
         /** Defino as preferencias */
         $ConfigurationsValidate->setPreferences(base64_encode(json_encode($resultConfiguration->preferences, JSON_PRETTY_PRINT)));
