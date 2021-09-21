@@ -6,8 +6,8 @@ class File{
 
     /** Parâmetros da Classes */
     private $path = null;
-    private $document = null;
     private $preferences = null;
+    private $document = null;
     private $wideImage = null;
 
     private $name = null;
@@ -78,18 +78,34 @@ class File{
 
     }
 
-    public function handling(string $path, object $preferences)
+    public function handling(string $path, string $name, array $preferences) : void
     {
 
         /** Parâmetros de entrada **/
         $this->path = (string)$path;
-        $this->preferences = (object)$preferences;
+        $this->name = (string)$name;
+        $this->preferences = (array)$preferences;
 
-        /** Corto a imagem para icone **/
-        $this->wideImage = \WideImage::load($path);
-        $this->wideImage = $this->wideImage->resize($this->preferences->file_resize_width, $this->preferences->file_resize_height, 'outside');
-        $this->wideImage = $this->wideImage->crop('center', 'center', $this->preferences->file_resize_width, $this->preferences->file_resize_height);
-        $this->wideImage = $this->wideImage->saveToFile($this->path,  $this->preferences->file_resize_height);
+        /** Listagem de Todos os Registros */
+        foreach ($this->preferences as $keyPreference => $preference)
+        {
+
+            /** Verifico se já existe alguma pasta */
+            if (!is_dir($this->path))
+            {
+
+                /** Crio o caminho **/
+                mkdir($this->path . '/' . $preference->name, 0777, true);
+
+            }
+
+            /** Corto a imagem para icone **/
+            $this->wideImage = \WideImage::load($path);
+            $this->wideImage = $this->wideImage->resize($preference->width, $preference->height, 'outside');
+            $this->wideImage = $this->wideImage->crop('center', 'center', $preference->width, $preference->height);
+            $this->wideImage = $this->wideImage->saveToFile($this->path . '/' . $preference->name . $this->name,  $preference->quality);
+
+        }
 
     }
 

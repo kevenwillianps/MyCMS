@@ -6,8 +6,8 @@
     /** Instânciamento de Classes */
     $Configurations = new Configurations();
 
-    /** Busco o registro */
-    $resultConfiguration = $Configurations->Get(@(int)$_POST['CONFIGURATION_ID']);
+    /** Busco a configuração */
+    $resultConfiguration = $Configurations->All();
 
     /** Decodifico as preferencias */
     $resultConfiguration->preferences = (object)json_decode(base64_decode($resultConfiguration->preferences));
@@ -56,7 +56,7 @@
 
                     </label>
 
-                    <input type="number" class="form-control" id="name" name="name" value="<?php echo utf8_encode(@(int)$resultConfiguration->preferences->name)?>">
+                    <input type="text" class="form-control" id="name" name="name" value="<?php echo utf8_encode(@(int)$resultConfiguration->preferences->name)?>">
 
                 </div>
 
@@ -128,6 +128,7 @@
     <input type="hidden" name="TABLE" value="CONFIGURATIONS">
     <input type="hidden" name="ACTION" value="CONFIGURATIONS_IMAGE_PREFERENCE_SAVE">
     <input type="hidden" name="indice" value="<?php echo utf8_encode(@(int)$resultConfiguration->configuration_id)?>">
+    <input type="hidden" name="configuration_id" value="<?php echo utf8_encode(@(int)$resultConfiguration->configuration_id)?>">
 
 </form>
 

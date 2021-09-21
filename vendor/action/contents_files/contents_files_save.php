@@ -29,7 +29,7 @@ try
     $resultConfiguration = $Configurations->All();
 
     /** Decodifico as preferencias */
-    $resultConfiguration->preferences = (object)json_decode(base64_decode($resultConfiguration->preferences));
+    $resultConfiguration->preferences = json_decode(base64_decode($resultConfiguration->preferences));
 
     /** Operações */
     $Main->SessionStart();
@@ -86,7 +86,7 @@ try
                 {
 
                     /** Manipulo as imagens */
-                    $File->handling($ContentsFilesValidate->getFullPath(), $resultConfiguration->preferences);
+                    $File->handling($ContentsFilesValidate->getPath(), $ContentsFilesValidate->getName(), $resultConfiguration->preferences);
 
                     /** Salvo o registro do arquivo */
                     if ($ContentsFiles->Save($ContentsFilesValidate->getContentFileId(), $ContentsFilesValidate->getContentId(), $ContentsFilesValidate->getHighlighterId(), $ContentsFilesValidate->getSituationId(), $ContentsFilesValidate->getUserId(), $ContentsFilesValidate->getPositionContent(), $ContentsFilesValidate->getName(), $ContentsFilesValidate->getFullPath()))

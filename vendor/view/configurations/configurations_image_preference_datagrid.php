@@ -6,11 +6,11 @@ use vendor\model\Configurations;
 /** Instânciamento de Classes */
 $Configurations = new Configurations();
 
-/** Busco o registro */
-$resultConfiguration = $Configurations->Get(@(int)$_POST['CONFIGURATION_ID']);
+/** Busco a configuração */
+$resultConfiguration = $Configurations->All();
 
 /** Decodifico as preferencias */
-$resultConfiguration->preferences = json_decode(base64_decode($resultConfiguration->preferences));
+$resultConfiguration->preferences = (array)json_decode(base64_decode($resultConfiguration->preferences));
 
 ?>
 
@@ -80,27 +80,39 @@ $resultConfiguration->preferences = json_decode(base64_decode($resultConfigurati
 
                 <thead>
 
-                <tr>
+                    <tr>
 
-                    <th scope="col" class="text-center">
+                        <th scope="col" class="text-center">
 
-                        #
+                            #
 
-                    </th>
+                        </th>
 
-                    <th scope="col">
+                        <th scope="col">
 
-                        Nome
+                            Nome
 
-                    </th>
+                        </th>
 
-                    <th scope="col" class="text-center">
+                        <th scope="col" class="text-center">
 
-                        Operações
+                            Largura
 
-                    </th>
+                        </th>
 
-                </tr>
+                        <th scope="col" class="text-center">
+
+                            Altura
+
+                        </th>
+
+                        <th scope="col" class="text-center">
+
+                            Qualidade
+
+                        </th>
+
+                    </tr>
 
                 </thead>
 
@@ -114,9 +126,33 @@ $resultConfiguration->preferences = json_decode(base64_decode($resultConfigurati
 
                     <tr class="border-top">
 
+                        <td class="text-center">
+
+                            <?php echo utf8_encode(@(string)$keyResult)?>
+
+                        </td>
+
                         <td>
 
                             <?php echo utf8_encode(@(string)$result->name)?>
+
+                        </td>
+
+                        <td class="text-center">
+
+                            <?php echo utf8_encode(@(int)$result->width)?>
+
+                        </td>
+
+                        <td class="text-center">
+
+                            <?php echo utf8_encode(@(int)$result->height)?>
+
+                        </td>
+
+                        <td class="text-center">
+
+                            <?php echo utf8_encode(@(int)$result->quality)?>
 
                         </td>
 

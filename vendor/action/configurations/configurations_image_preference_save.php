@@ -3,10 +3,12 @@
 /** Importação de classes */
 use vendor\model\Configurations;
 use vendor\controller\configurations\ConfigurationsValidate;
+use vendor\controller\configurations\ConfigurationsImagePreferenceValidate;
 
 /** Instânciamento de classes */
 $Configurations = new Configurations();
 $ConfigurationsValidate = new ConfigurationsValidate();
+$ConfigurationsImagePreferenceValidate = new ConfigurationsImagePreferenceValidate();
 
 /** Controle de mensagens */
 $message = null;
@@ -18,58 +20,51 @@ try {
 
     /** Parâmetros de entrada */
     $ConfigurationsValidate->setConfigurationId(@(int)$_POST['configuration_id']);
-    $ConfigurationsValidate->setTitle(@(string)$_POST['title']);
-    $ConfigurationsValidate->setCopyright(@(string)$_POST['copyright']);
-    $ConfigurationsValidate->setAuthor(@(string)$_POST['author']);
-    $ConfigurationsValidate->setDescription(@(string)$_POST['description']);
-    $ConfigurationsValidate->setKeywords(@(string)$_POST['keywords']);
-    $ConfigurationsValidate->setHistory(@(string)$_POST['history']);
-
-    /** Verifico o tipo de histórico */
-    if ($ConfigurationsValidate->getHistory() > 0) {
-
-        /** Busco o Histórico */
-        $resultHistory = json_decode(base64_decode($Configurations->Get($ConfigurationsValidate->getHistory())->history),true);
-
-        /** Captura dos dados de login */
-        $history[0]['title'] = 'Atualização';
-        $history[0]['description'] = 'Atualização no registro';
-        $history[0]['class'] = 'badge-warning';
-
-        /** Junto as array */
-        $history = array_merge($history, $resultHistory);
-
-    } else {
-
-        /** Captura dos dados de login */
-        $history[0]['title'] = 'Cadastro';
-        $history[0]['description'] = 'Novo registro cadastrado';
-        $history[0]['class'] = 'badge-success';
-
-    }
-
-    $history[0]['date'] = date('d-m-Y');
-    $history[0]['time'] = date('H:i:s');
-
-    /** Salvo o histórico do registro */
-    $ConfigurationsValidate->setHistory(base64_encode(json_encode($history, JSON_PRETTY_PRINT)));
+    $ConfigurationsImagePreferenceValidate->setIndice(@(int)$_POST['indice']);
+    $ConfigurationsImagePreferenceValidate->setName(@(string)$_POST['name']);
+    $ConfigurationsImagePreferenceValidate->setWidth(@(int)$_POST['width']);
+    $ConfigurationsImagePreferenceValidate->setHeight(@(int)$_POST['height']);
+    $ConfigurationsImagePreferenceValidate->setQuality(@(int)$_POST['quality']);
 
     /** Verifico a existência de erros */
-    if (!empty($ConfigurationsValidate->getErrors())) {
+    if (!empty($ConfigurationsImagePreferenceValidate->getErrors())) {
 
         /** Preparo o formulario para retorno **/
         $result = [
 
             'cod' => 0,
             'title' => 'Atenção',
-            'message' => $ConfigurationsValidate->getErrors(),
+            'message' => $ConfigurationsImagePreferenceValidate->getErrors(),
 
         ];
 
     } else {
 
+        /** Busco as configurações já existentes */
+        $resultConfiguration = $Configurations->All();
+
+        /** Decodifico as preferencias */
+        $resultConfiguration->preferences = (array)json_decode(base64_decode($resultConfiguration->preferences));
+
+        $preferences[0]['name'] = $ConfigurationsImagePreferenceValidate->getName();
+        $preferences[0]['width'] = $ConfigurationsImagePreferenceValidate->getWidth();
+        $preferences[0]['height'] = $ConfigurationsImagePreferenceValidate->getHeight();
+        $preferences[0]['quality'] = $ConfigurationsImagePreferenceValidate->getQuality();
+
+        /** verifico se existe dados para unficiar */
+        if (count($resultConfiguration->preferences) > 0)
+        {
+
+            /** Unificação de array */
+            $preferences = array_merge($resultConfiguration->preferences, $preferences);
+
+        }
+
+        /** Salvo o histórico do registro */
+        $ConfigurationsValidate->setPreferences(base64_encode(json_encode($preferences, JSON_PRETTY_PRINT)));
+
         /** Verifico se o usuário foi localizado */
-        if ($Configurations->Save($ConfigurationsValidate->getConfigurationId(), $ConfigurationsValidate->getTitle(), $ConfigurationsValidate->getCopyright(), $ConfigurationsValidate->getAuthor(), $ConfigurationsValidate->getDescription(), $ConfigurationsValidate->getKeywords(), $ConfigurationsValidate->getPreferences(), $ConfigurationsValidate->getHistory()))
+        if ($Configurations->SavePreference($ConfigurationsValidate->getConfigurationId(), $ConfigurationsValidate->getPreferences()))
         {
 
             /** Adição de elementos na array */
@@ -81,7 +76,7 @@ try {
                 'cod' => 200,
                 'title' => 'Sucesso',
                 'message' => $message,
-                'redirect' => 'FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_DATAGRID',
+                'redirect' => 'FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_IMAGE_PREFERENCE_DATAGRID',
 
             ];
 
