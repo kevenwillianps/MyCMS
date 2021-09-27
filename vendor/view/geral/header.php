@@ -78,6 +78,16 @@
 
                 <li class="nav-item">
 
+                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_DATAGRID')">
+
+                        <i class="fas fa-users mr-1"></i>Usuários
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
                     <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DATAGRID')">
 
                         <i class="fas fa-cog mr-1"></i>Situação
@@ -91,16 +101,6 @@
                     <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_DATAGRID')">
 
                         <i class="fas fa-highlighter mr-1"></i>Marcadores
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_DATAGRID')">
-
-                        <i class="fas fa-users mr-1"></i>Usuários
 
                     </a>
 

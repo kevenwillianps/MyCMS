@@ -2,7 +2,7 @@
 
 /** Defino o local da classes */
 
-namespace vendor\controller\Users;
+namespace vendor\controller\users;
 
 /** Importação de classes */
 use vendor\model\Main;
@@ -22,7 +22,6 @@ class UsersValidate
     private $email = null;
     private $password = null;
     private $history = null;
-    private $date = null;
 
     /** Método construtor */
     public function __construct()
@@ -40,7 +39,7 @@ class UsersValidate
         $this->userId = isset($userId) ? $this->Main->antiInjection($userId) : null;
 
         /** Validação da informação */
-        if ($this->userId <= 0) {
+        if ($this->userId < 0) {
 
             /** Adiciono um elemento a array */
             array_push($this->errors, 'O campo "User ID", deve ser válido');

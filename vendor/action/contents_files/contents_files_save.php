@@ -3,8 +3,8 @@
 /** Importação de classes */
 use \vendor\model\Main;
 use \vendor\model\Configurations;
-use \vendor\controller\File\File;
-use \vendor\controller\File\FileValidate;
+use \vendor\controller\file\File;
+use \vendor\controller\file\FileValidate;
 use \vendor\model\Contents;
 use \vendor\model\ContentsFiles;
 use \vendor\controller\contents_files\ContentsFilesValidade;

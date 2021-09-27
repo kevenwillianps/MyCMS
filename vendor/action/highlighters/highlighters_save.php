@@ -2,7 +2,7 @@
 
 /** Importação de classes */
 use vendor\model\Highlighters;
-use vendor\controller\Highlighters\HighlightersValidate;
+use vendor\controller\highlighters\HighlightersValidate;
 
 /** Instânciamento de classes */
 $Highlighters = new Highlighters();

@@ -1,7 +1,6 @@
 <?php
 
 require_once('./vendor/autoload.php');
-require_once('./vendor/model/dompdf/autoload.php');
 require_once('./vendor/model/wideImage/WideImage.php');
 
 /** Parâmetros de entrada **/

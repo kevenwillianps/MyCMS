@@ -1,12 +1,12 @@
 <?php
 
 /** Importação de classes */
-use vendor\model\ContentsSubsFiles;
-use vendor\controller\contents_subs_files\ContentsSubsFilesValidate;
+use vendor\model\Users;
+use vendor\controller\users\UsersValidate;
 
 /** Instânciamento de classes */
-$ContentsSubsFiles = new ContentsSubsFiles();
-$ContentsSubsFilesValidaTe = new ContentsSubsFilesValidate();
+$Users = new Users();
+$UsersValidate = new UsersValidate();
 
 /** Controle de mensagens */
 $message = null;
@@ -15,32 +15,24 @@ $result = array();
 try {
 
     /** Parâmetros de entrada */
-    $ContentsSubsFilesValidaTe->setContentSubId(@(int)$_POST['content_sub_id']);
-    $ContentsSubsFilesValidaTe->setContentSubFileId(@(int)$_POST['content_sub_file_id']);
+    $UsersValidate->setUserId(@(int)filter_input(INPUT_POST, 'USER_ID', FILTER_SANITIZE_STRING));
 
     /** Verifico a existência de erros */
-    if (!empty($ContentsSubsFilesValidaTe->getErrors())) {
+    if (!empty($UsersValidate->getErrors())) {
 
         /** Preparo o formulario para retorno **/
         $result = [
 
             'cod' => 0,
             'title' => 'Atenção',
-            'message' => $ContentsSubsFilesValidaTe->getErrors(),
+            'message' => $UsersValidate->getErrors(),
 
         ];
 
     } else {
 
-        /** Busco oregistro */
-        $resultContentSubFile = $ContentsSubsFiles->Get($ContentsSubsFilesValidaTe->getContentSubFileId());
-
         /** Verifico se o usuário foi localizado */
-        if ($ContentsSubsFiles->Delete($ContentsSubsFilesValidaTe->getContentSubFileId()))
-        {
-
-            /** Remoção do arquivo */
-            unlink($resultContentSubFile->path);
+        if ($Users->Delete($UsersValidate->getUserId())) {
 
             /** Adição de elementos na array */
             $message = 'Registro removido com sucesso';
@@ -51,7 +43,7 @@ try {
                 'cod' => 200,
                 'title' => 'Sucesso',
                 'message' => $message,
-                'redirect' => 'FOLDER=VIEW&TABLE=CONTENTS_SUBS_FILES&ACTION=CONTENTS_SUBS_FILES_DATAGRID&CONTENT_SUB_ID=' . $ContentsSubsFilesValidaTe->getContentSubId(),
+                'redirect' => 'FOLDER=VIEW&TABLE=USERS&ACTION=USERS_DATAGRID',
 
             ];
 

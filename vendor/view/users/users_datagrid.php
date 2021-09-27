@@ -30,11 +30,11 @@ if (count($Users->All()) > 0)
 
         <div class="col-md-6 text-right">
 
-            <a type="button" class="btn btn-primary btn-sm" onclick="request('FOLDER=VIEW&PRODUCT=GR&TABLE=GUSUARIO&ACTION=G_USUARIO_FORM')">
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_FORM')">
 
-                <i class="fas fa-list-ul mr-1"></i>Novo Usuário
+                <i class="fas fa-plus-circle mr-1"></i>Adicionar
 
-            </a>
+            </button>
 
         </div>
 
@@ -43,7 +43,7 @@ if (count($Users->All()) > 0)
         /** Listagem de todos os registros */
         foreach ($Users->All() as $keyResultUser => $resultUser){ ?>
 
-            <div class="col-md-3 d-flex mb-3 animate slideIn">
+            <form role="form" id="formUsers_<?php echo utf8_encode(@(string)$keyResultUser)?>" class="col-md-3 d-flex mb-3 animate slideIn">
 
                 <div class="card p-3 shadow-sm w-100">
 
@@ -57,7 +57,7 @@ if (count($Users->All()) > 0)
 
                                     <h5 class="mb-0 mt-0">
 
-                                        <?php echo utf8_encode(@(string)$resultUser->name_first)?> <?php echo utf8_encode(@(string)$resultUser->name_last)?>
+                                        <?php echo utf8_encode(@(string)$resultUser->user_id)?> - <?php echo utf8_encode(@(string)$resultUser->name_first)?> <?php echo utf8_encode(@(string)$resultUser->name_last)?>
 
                                     </h5>
 
@@ -71,13 +71,13 @@ if (count($Users->All()) > 0)
 
                                     <span class="articles">
 
-                                        Publicações
+                                        Conteúdo
 
                                     </span>
 
                                     <span class="number1">
 
-                                        38
+                                        <?php echo utf8_encode(@(int)$resultUser->quantity_contents)?>
 
                                     </span>
 
@@ -87,13 +87,13 @@ if (count($Users->All()) > 0)
 
                                     <span class="followers">
 
-                                        Acessos
+                                        Vinculados
 
                                     </span>
 
                                     <span class="number2">
 
-                                        <?php echo utf8_encode(@(string)$resultUser->SITUACAO) === 'A' ? 'Ativo' : 'Inativo'?>
+                                        <?php echo utf8_encode(@(int)$resultUser->quantity_contents_subs)?>
 
                                     </span>
 
@@ -103,13 +103,13 @@ if (count($Users->All()) > 0)
 
                             <div class="button mt-2 d-flex flex-row align-items-center">
 
-                                <button class="btn btn-sm btn-outline-primary w-100">
+                                <button type="button" class="btn btn-sm btn-outline-danger w-100" onclick="sendForm('#formUsers_<?php echo utf8_encode(@(string)$keyResultUser)?>')">
 
-                                    <i class="far fa-eye mr-1"></i>Detalhes
+                                    <i class="fas fa-fire-alt mr-1"></i>Excluir
 
                                 </button>
 
-                                <button type="button" class="btn btn-sm btn-primary w-100 ml-2" onclick="request('FOLDER=VIEW&PRODUCT=GR&TABLE=GUSUARIO&ACTION=G_USUARIO_FORM&USUARIO_ID=<?php echo utf8_encode(@(int)$resultUser->USUARIO_ID)?>')">
+                                <button type="button" class="btn btn-sm btn-primary w-100 ml-2" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_FORM&USER_ID=<?php echo utf8_encode(@(int)$resultUser->user_id)?>')">
 
                                     <i class="fas fa-pencil-alt mr-1"></i>Editar
 
@@ -123,7 +123,12 @@ if (count($Users->All()) > 0)
 
                 </div>
 
-            </div>
+                <input type="hidden" name="FOLDER" value="ACTION">
+                <input type="hidden" name="TABLE" value="USERS">
+                <input type="hidden" name="ACTION" value="USERS_DELETE">
+                <input type="hidden" name="USER_ID" value="<?php echo utf8_encode(@(int)$resultUser->user_id)?>">
+
+            </form>
 
         <?php }?>
 

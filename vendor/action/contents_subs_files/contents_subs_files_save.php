@@ -3,11 +3,11 @@
 /** Importação de classes */
 use \vendor\model\Main;
 use \vendor\model\Configurations;
-use \vendor\controller\File\File;
-use \vendor\controller\File\FileValidate;
+use \vendor\controller\file\File;
+use \vendor\controller\file\FileValidate;
 use \vendor\model\ContentsSubs;
 use \vendor\model\ContentsSubsFiles;
-use \vendor\controller\contents_subs_files\ContentsSubsFilesValidaTe;
+use \vendor\controller\contents_subs_files\ContentsSubsFilesValidate;
 
 /** Instânciamento de classes */
 $Main = new Main();
@@ -16,7 +16,7 @@ $FileValidate = new FileValidate();
 $Configurations = new Configurations();
 $ContentsSubs = new ContentsSubs();
 $ContentsSubsFiles = new ContentsSubsFiles();
-$ContentsSubsFilesValidaTe = new ContentsSubsFilesValidaTe();
+$ContentsSubsFilesValidaTe = new ContentsSubsFilesValidate();
 
 /** Controle de mensagens */
 $message = null;

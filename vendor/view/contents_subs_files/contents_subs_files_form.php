@@ -5,14 +5,14 @@ use vendor\model\Situations;
 use vendor\model\Highlighters;
 use \vendor\model\ContentsSubs;
 use \vendor\model\ContentsSubsFiles;
-use \vendor\controller\contents_subs_files\ContentsSubsFilesValidaTe;
+use \vendor\controller\contents_subs_files\ContentsSubsFilesValidate;
 
 /** Instânciamento de classes */
 $Situations = new Situations();
 $Highlighters = new Highlighters();
 $ContentsSubs = new ContentsSubs();
 $ContentsSubsFiles = new ContentsSubsFiles();
-$ContentsSubsFilesValidaTe = new ContentsSubsFilesValidaTe();
+$ContentsSubsFilesValidaTe = new ContentsSubsFilesValidate();
 
 /** Busco o registro */
 $resultContentSub = $ContentsSubs->Get(@(int)$_POST['CONTENT_SUB_ID']);

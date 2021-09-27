@@ -22,7 +22,7 @@
     * @package Internal/Mappers
   **/
     
-    include_once WideImage::path() . '/vendor/de77/TGA.php';
+    include_once WideImage::path() . '/phpmailer/de77/TGA.php';
     
     /**
      * Mapper support for TGA

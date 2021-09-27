@@ -38,11 +38,6 @@
     <meta name="doc-rights" content="Public" />
     <meta name="revisit-after" content="1 days" />
     <meta name="googlebot" content="index, follow" />
-    <meta name="title" content="Graciele Fotografia" />
-    <meta name="copyright" content="Graciele Fotografia" />
-    <meta name="author" content="Keven Willian" />
-    <meta name="keywords" content="suporte, assessoria, serviÃ§os, ti, nuvem, cloud, computing, ri, sistema, cartÃ³rios, ri, registro, matricula, certidÃ£o, Ã´nus, livro 2, livro2, livro3, nascimento, casamento, natimorto, notas, protesto, tabeliÃ£o, tabeliÃ£, oficial, serventia, selo, ficha, imÃ³vel, escritura, lote, ficha, auxiliar, escrivÃ£, escrivÃ£o, sites, portais, aplicativos, publicidade, ged, gerenciamento, documentos, provimento 74, provimento 88. provimento 86, provimento 63, provimentos,  Tabelionato de Notas, Protesto de TÃ­tulos e Documentos, Registro de TÃ­tulos e Documentos, Registro de ImÃ³veis, Welber Eduardo de Jesus, Kenio de Souza, Keven Willian, Rodrigo Moreira da Silva Moura, Iolanda Fernandes, JosÃ© Euripedes" />
-    <meta name="description" content="Graciele Fotografia" />
 
     <title>
 
@@ -51,27 +46,27 @@
     </title>
 
     <!-- Importação de arquivos de estilo -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="fonts/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="css/animate-dropdown.css">
-    <link rel="stylesheet" href="css/timeline.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="css/block.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/normalize.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>fonts/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/animate-dropdown.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/timeline.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/block.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/main.css">
+    <link rel="stylesheet" href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>css/modal.css">
 
     <!-- Importação de arquivos javascript -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/ckeditor.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/form.js"></script>
-    <script src="js/block.js"></script>
-    <script src="js/modal.js"></script>
-    <script src="js/file.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/jquery.min.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/main.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/ckeditor.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/popper.min.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/bootstrap.min.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/bootstrap-select.min.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/form.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/block.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/modal.js"></script>
+    <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/file.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>

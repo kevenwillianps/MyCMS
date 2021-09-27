@@ -2,7 +2,7 @@
 
 /** Importação de classes */
 use vendor\model\Situations;
-use vendor\controller\Situations\SituationsValidate;
+use vendor\controller\situations\SituationsValidate;
 
 /** Instânciamento de classes */
 $Situations = new Situations();

@@ -1,9 +1,9 @@
 {
-    "url_aplicacao": "http:\/\/localhost\/MyCMS\/",
+    "url_aplicacao": "https:\/\/mycms.souza.inf.br\/",
     "database": {
-        "name": "mycms",
-        "user": "root",
-        "password": "",
+        "name": "palav482_souza",
+        "user": "palav482_souza",
+        "password": "Star147oi.",
         "charset": "UTF-8"
     }
 }

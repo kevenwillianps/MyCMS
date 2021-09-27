@@ -1,7 +1,7 @@
 <?php
 
 /** Defino o local da classes */
-namespace vendor\controller\Situations;
+namespace vendor\controller\situations;
 
 /** Importação de classes */
 use vendor\model\Main;

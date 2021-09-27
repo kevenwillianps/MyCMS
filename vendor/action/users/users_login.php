@@ -3,7 +3,7 @@
 /** Importação de classes */
 use \vendor\model\Main;
 use \vendor\model\Users;
-use \vendor\controller\Users\UsersValidate;
+use \vendor\controller\users\UsersValidate;
 
 /** Instânciamento de classes */
 $Main = new Main();
