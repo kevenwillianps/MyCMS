@@ -19,7 +19,7 @@
 <html lang="pt-br">
 <head>
 
-    <base href="<?php echo utf8_encode($config->url_aplicacao)?>"/>
+    <base href="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="pt-br, en, fr, it">
@@ -38,6 +38,7 @@
     <meta name="doc-rights" content="Public" />
     <meta name="revisit-after" content="1 days" />
     <meta name="googlebot" content="index, follow" />
+    <link rel="icon" href="favicon.ico">
 
     <title>
 
@@ -67,7 +68,6 @@
     <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/block.js"></script>
     <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/modal.js"></script>
     <script src="<?php echo utf8_encode(@(string)$config->url_aplicacao)?>js/file.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -94,7 +94,11 @@
 
        <div class="container">
 
-           <div id="page-wrapper" class="mt-3"></div>
+           <div id="page-wrapper" class="mt-3">
+
+
+
+           </div>
            
        </div>
 

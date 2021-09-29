@@ -4,11 +4,13 @@
 use \vendor\model\Main;
 use \vendor\model\Users;
 use \vendor\controller\users\UsersValidate;
+use \vendor\controller\email\Email;
 
 /** Instânciamento de classes */
 $Main = new Main();
 $Users = new Users();
 $UsersValidate = new UsersValidate();
+$Email = new Email();
 
 /** Controle de mensagens */
 $message = null;
@@ -39,7 +41,7 @@ try
     {
 
         /** Realizo o acesso */
-        $resultUser = $Users->Access($UsersValidate->getEmail(), md5($UsersValidate->getPassword()));
+        $resultUser = (object)$Users->Access($UsersValidate->getEmail(), md5($UsersValidate->getPassword()));
 
         /** Verifico se o usuário foi localizado */
         if (@(int)$resultUser->user_id > 0)
@@ -79,8 +81,20 @@ try
             if ($Users->SaveHistory((int)$resultUser->user_id, (string)$history))
             {
 
-                /** Adição de elementos na array */
-                $message = 'Histórico salvo com sucesso';
+                /** Inicio a coleta de dados */
+                ob_start();
+
+                /** Inclusão do arquivo desejado */
+                @include_once 'vendor/view/email/email_info_login.php';
+
+                /** Prego a estrutura do arquivo */
+                $html = ob_get_contents();
+
+                /** Removo o arquivo incluido */
+                ob_clean();
+
+                /** Envio de emil */
+                $Email->send($html, $resultUser, 'Login Realizado');
 
                 /** Result **/
                 $result = [

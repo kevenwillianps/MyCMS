@@ -2,13 +2,13 @@
 
     <div class="col-md-12 text-center">
 
-        <img src="image/logo-rounded.png" alt="" width="60px">
+        <img src="image/logo.png" alt="" width="60px">
 
         <div class="my-3">
 
             <h4 class="">
 
-                Faça login no
+                Redefinição de senha do
 
                 <strong>
 
@@ -48,43 +48,17 @@
 
                     <div class="col-md-12">
 
-                        <div class="form-group">
-
-                            <label for="password">
-
-                                Senha <span class="text-danger">*</span>
-
-                            </label>
-
-                            <input type="password" class="form-control" name="password" id="password">
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-12">
-
                         <button type="button" class="btn btn-primary btn-block" onclick="sendForm('#formUsuarioLogin')">
 
-                            <i class="far fa-paper-plane mr-1"></i>Acessar
+                            <i class="far fa-paper-plane mr-1"></i>Solicitar
 
                         </button>
 
                     </div>
 
-                    <div class="col-md-12 text-right mt-3">
-
-                        <a type="button" class="text-primary" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_FORM_REQUEST_RESET_PASSWORD')">
-
-                            Esqueci a <strong>senha</strong>
-
-                        </a>
-
-                    </div>
-
                     <input type="hidden" name="FOLDER" value="ACTION"/>
                     <input type="hidden" name="TABLE" value="USERS"/>
-                    <input type="hidden" name="ACTION" value="USERS_LOGIN"/>
+                    <input type="hidden" name="ACTION" value="USERS_REQUEST_RESET_PASSWORD"/>
 
                 </form>
 
@@ -92,9 +66,9 @@
 
         </div>
 
-        <button type="button" class="btn btn-outline-primary btn-block mt-3" onclick="request('FOLDER=VIEW&PRODUCT=GR&TABLE=GUSUARIO&ACTION=G_USUARIO_REGISTER')">
+        <button type="button" class="btn btn-outline-primary btn-block mt-3" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_LOGIN')">
 
-            Novo no MyCMS? <strong>Crie uma conta</strong>
+            Realizar <strong>Login</strong>
 
         </button>
 

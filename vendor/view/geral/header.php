@@ -4,7 +4,7 @@
 
         <a type="button" onclick="request('FOLDER=VIEW&PRODUCT=GR&TABLE=GERAL&ACTION=HOME')" class="navbar-brand">
 
-            <img src="image/logo.png" width="30" alt="MyCMS - Souza Consultoria Tecnológica" loading="lazy"> <strong>My</strong>CMS
+            <img src="image/logo-rounded.png" width="30" alt="MyCMS - Souza Consultoria Tecnológica" loading="lazy"> <strong>My</strong>CMS
 
         </a>
 

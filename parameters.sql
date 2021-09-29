@@ -140,3 +140,20 @@ CREATE TABLE contents_subs_files (
   FOREIGN KEY (highlighter_id) REFERENCES highlighters (highlighter_id)
 )
   ENGINE = innodb;
+
+CREATE TABLE contents_subs_files (
+  content_sub_file_id  INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  content_sub_id   INT(11) UNSIGNED,
+  highlighter_id   INT(11) UNSIGNED,
+  situation_id     INT(11) UNSIGNED,
+  user_id          INT(11) UNSIGNED,
+  position_content INT(11) UNSIGNED,
+  name             VARCHAR(121) NOT NULL,
+  path             VARCHAR(121) NOT NULL,
+  date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (situation_id) REFERENCES situations (situation_id),
+  FOREIGN KEY (user_id) REFERENCES users (user_id),
+  FOREIGN KEY (content_sub_id) REFERENCES contents_subs (content_sub_id) ON DELETE CASCADE,
+  FOREIGN KEY (highlighter_id) REFERENCES highlighters (highlighter_id)
+)
+  ENGINE = innodb;

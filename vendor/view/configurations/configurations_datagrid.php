@@ -162,7 +162,7 @@ $resultConfiguration->preferences = (object)json_decode(base64_decode($resultCon
 
                                 <h6 class="mt-0">
 
-                                    <i class="far fa-copyright mr-1"></i>Copyrigth
+                                    <i class="far fa-copyright mr-1"></i>Copyright
 
                                 </h6>
 

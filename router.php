@@ -2,6 +2,7 @@
 
 require_once('./vendor/autoload.php');
 require_once('./vendor/model/wideImage/WideImage.php');
+require_once('./vendor/model/phpmailer/autoload.php');
 
 /** Parâmetros de entrada **/
 $table = strtolower(isset($_REQUEST['TABLE']) ? htmlspecialchars($_REQUEST['TABLE']) : null);
