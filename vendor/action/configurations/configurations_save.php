@@ -27,11 +27,17 @@ try {
     /** Preferencias */
     $preferences['file_path_contents'] = @(string)$_POST['file_path_contents'];
     $preferences['file_path_contents_subs'] = @(string)$_POST['file_path_contents_subs'];
+    $preferences['file_path_users_files'] = @(string)$_POST['file_path_users_files'];
     $preferences['file_name'] = @(string)$_POST['file_name'];
     $preferences['twitter_user'] = @(string)$_POST['twitter_user'];
     $preferences['facebook_id'] = @(string)$_POST['facebook_id'];
     $preferences['url'] = @(string)$_POST['url'];
     $preferences['images_dimensions'] = array();
+
+    $preferences['email_host'] = @(string)$_POST['email_host'];
+    $preferences['email_username'] = @(string)$_POST['email_username'];
+    $preferences['email_port'] = @(string)$_POST['email_port'];
+    $preferences['email_password'] = @(string)$_POST['email_password'];
 
     /** Salvo o histórico do registro */
     $ConfigurationsValidate->setPreferences(base64_encode(json_encode($preferences, JSON_PRETTY_PRINT)));

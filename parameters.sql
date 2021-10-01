@@ -1,14 +1,15 @@
 CREATE TABLE configurations (
   configuration_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  title         VARCHAR(121) NOT NULL,
-  copyright         VARCHAR(121) NOT NULL,
-  author         VARCHAR(121) NOT NULL,
-  description   longtext     NOT NULL,
-  keywords    longtext     NOT NULL,
-  preferences    longtext     NOT NULL,
-  history      longtext     NOT NULL,
-  date         TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
-)  ENGINE = innodb;
+  title            VARCHAR(121) NOT NULL,
+  copyright        VARCHAR(121) NOT NULL,
+  author           VARCHAR(121) NOT NULL,
+  description      longtext     NOT NULL,
+  keywords         longtext     NOT NULL,
+  preferences      longtext     NOT NULL,
+  history          longtext     NOT NULL,
+  date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
+)
+  ENGINE = innodb;
 
 
 CREATE TABLE users (
@@ -20,6 +21,17 @@ CREATE TABLE users (
   password   VARCHAR(121) NOT NULL,
   history    longtext     NOT NULL,
   date       TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
+)
+  ENGINE = innodb;
+
+CREATE TABLE users_files (
+  user_file_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id      INT(11) UNSIGNED,
+  name         VARCHAR(121) NOT NULL,
+  path_profile VARCHAR(121) NOT NULL,
+  path_cover   VARCHAR(121) NOT NULL,
+  date         TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users (user_id)
 )
   ENGINE = innodb;
 
@@ -68,7 +80,7 @@ CREATE TABLE contents (
   description         VARCHAR(121) NOT NULL,
   content_resume      VARCHAR(321) NOT NULL,
   content_complete    LONGTEXT,
-  keywords    LONGTEXT,
+  keywords            LONGTEXT,
   date_start          VARCHAR(121),
   date_closing        VARCHAR(121),
   history             longtext     NOT NULL,
@@ -92,7 +104,8 @@ CREATE TABLE contents_files (
   date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (situation_id) REFERENCES situations (situation_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id),
-  FOREIGN KEY (content_id) REFERENCES contents (content_id) ON DELETE CASCADE,
+  FOREIGN KEY (content_id) REFERENCES contents (content_id)
+    ON DELETE CASCADE,
   FOREIGN KEY (highlighter_id) REFERENCES highlighters (highlighter_id)
 )
   ENGINE = innodb;
@@ -111,7 +124,7 @@ CREATE TABLE contents_subs (
   description      VARCHAR(121) NOT NULL,
   content_resume   VARCHAR(321) NOT NULL,
   content_complete LONGTEXT,
-  keywords    LONGTEXT,
+  keywords         LONGTEXT,
   date_start       VARCHAR(121),
   date_closing     VARCHAR(121),
   history          longtext     NOT NULL,
@@ -125,35 +138,48 @@ CREATE TABLE contents_subs (
   ENGINE = innodb;
 
 CREATE TABLE contents_subs_files (
-  content_sub_file_id  INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  content_sub_id   INT(11) UNSIGNED,
-  highlighter_id   INT(11) UNSIGNED,
-  situation_id     INT(11) UNSIGNED,
-  user_id          INT(11) UNSIGNED,
-  position_content INT(11) UNSIGNED,
-  name             VARCHAR(121) NOT NULL,
-  path             VARCHAR(121) NOT NULL,
-  date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
+  content_sub_file_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  content_sub_id      INT(11) UNSIGNED,
+  highlighter_id      INT(11) UNSIGNED,
+  situation_id        INT(11) UNSIGNED,
+  user_id             INT(11) UNSIGNED,
+  position_content    INT(11) UNSIGNED,
+  name                VARCHAR(121) NOT NULL,
+  path                VARCHAR(121) NOT NULL,
+  date                TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (situation_id) REFERENCES situations (situation_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id),
-  FOREIGN KEY (content_sub_id) REFERENCES contents_subs (content_sub_id) ON DELETE CASCADE,
+  FOREIGN KEY (content_sub_id) REFERENCES contents_subs (content_sub_id)
+    ON DELETE CASCADE,
   FOREIGN KEY (highlighter_id) REFERENCES highlighters (highlighter_id)
 )
   ENGINE = innodb;
 
 CREATE TABLE contents_subs_files (
-  content_sub_file_id  INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  content_sub_id   INT(11) UNSIGNED,
-  highlighter_id   INT(11) UNSIGNED,
-  situation_id     INT(11) UNSIGNED,
-  user_id          INT(11) UNSIGNED,
-  position_content INT(11) UNSIGNED,
-  name             VARCHAR(121) NOT NULL,
-  path             VARCHAR(121) NOT NULL,
-  date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
+  content_sub_file_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  content_sub_id      INT(11) UNSIGNED,
+  highlighter_id      INT(11) UNSIGNED,
+  situation_id        INT(11) UNSIGNED,
+  user_id             INT(11) UNSIGNED,
+  position_content    INT(11) UNSIGNED,
+  name                VARCHAR(121) NOT NULL,
+  path                VARCHAR(121) NOT NULL,
+  date                TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (situation_id) REFERENCES situations (situation_id),
   FOREIGN KEY (user_id) REFERENCES users (user_id),
-  FOREIGN KEY (content_sub_id) REFERENCES contents_subs (content_sub_id) ON DELETE CASCADE,
+  FOREIGN KEY (content_sub_id) REFERENCES contents_subs (content_sub_id)
+    ON DELETE CASCADE,
   FOREIGN KEY (highlighter_id) REFERENCES highlighters (highlighter_id)
+)
+  ENGINE = innodb;
+
+CREATE TABLE contacts (
+  contact_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name       VARCHAR(121) NOT NULL,
+  email      VARCHAR(121) NOT NULL,
+  cellphone  VARCHAR(121) NOT NULL,
+  subject    VARCHAR(291) NOT NULL,
+  message    longtext     NOT NULL,
+  date       TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
 )
   ENGINE = innodb;

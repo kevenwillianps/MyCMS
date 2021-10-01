@@ -66,6 +66,16 @@
 
             </li>
 
+            <li class="nav-item nav-link-pill mx-1" role="email">
+
+                <a class="nav-link" id="pills-configuracoes-tab" data-toggle="pill" href="#pills-email" role="tab" aria-controls="pills-email" aria-selected="false">
+
+                    <i class="fas fa-at mr-1"></i>Email
+
+                </a>
+
+            </li>
+
         </ul>
 
         <div class="tab-content" id="pills-tabContent">
@@ -210,7 +220,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
 
                         <div class="form-group">
 
@@ -226,7 +236,7 @@
 
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
 
                         <div class="form-group">
 
@@ -237,6 +247,22 @@
                             </label>
 
                             <input type="text" class="form-control" id="file_path_contents_subs" name="file_path_contents_subs" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->file_path_contents_subs)?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+
+                            <label for="file_path_users_files">
+
+                                Caminho dos Arquivos de <strong>Usuários</strong>:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="file_path_users_files" name="file_path_users_files" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->file_path_users_files)?>">
 
                         </div>
 
@@ -253,6 +279,78 @@
                             </label>
 
                             <input type="text" class="form-control" id="file_name" name="file_name" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->file_name)?>">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-email" role="tabpanel" aria-labelledby="pills-email-tab">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+
+                            <label for="email_host">
+
+                                Host:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="email_host" name="email_host" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->email_host)?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+
+                            <label for="email_username">
+
+                                Usuário:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="email_username" name="email_username" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->email_username)?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+
+                            <label for="email_port">
+
+                                Port:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="email_port" name="email_port" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->email_port)?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+
+                            <label for="email_password">
+
+                                Senha:
+
+                            </label>
+
+                            <input type="text" class="form-control" id="email_password" name="email_password" value="<?php echo utf8_encode(@(string)$resultConfiguration->preferences->email_password)?>">
 
                         </div>
 

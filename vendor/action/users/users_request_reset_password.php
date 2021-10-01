@@ -2,15 +2,15 @@
 
 /** Importação de classes */
 use \vendor\model\Users;
+use \vendor\model\Configurations;
 use \vendor\controller\users\UsersValidate;
-use \PHPMailer\PHPMailer\PHPMailer;
-use \PHPMailer\PHPMailer\SMTP;
-use \PHPMailer\PHPMailer\Exception;
+use \vendor\controller\email\Email;
 
 /** Instânciamento de classes */
 $Users = new Users();
+$Configurations = new Configurations();
 $UsersValidate = new UsersValidate();
-$mail = new PHPMailer(true);
+$Email = new Email();
 
 /** Controle de mensagens */
 $message = null;
@@ -18,6 +18,9 @@ $result = Array();
 
 try
 {
+
+    /** Operações */
+    $resultConfigurations = (object)json_decode(base64_decode($Configurations->All()->preferences));
 
     /** Parâmetros de entrada */
     $UsersValidate->setEmail(@(string)filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING));
@@ -46,39 +49,23 @@ try
         if (@(int)$resultUser->user_id > 0)
         {
 
-            /** Configurações do servidor */
-            $mail->isSMTP();
-            $mail->Host = 'mail.souza.inf.br';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'contato@souza.inf.br';
-            $mail->Password = 'Star147oi.';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port = 465;
+            /** Inicio a coleta de dados */
+            ob_start();
 
-            //Recipients
-            $mail->setFrom('contato@souza.inf.br', 'Envio pelo formulario de contato');
-            $mail->addAddress('kevenwillian@outlook.com', 'Graciele Souza');
-//            $mail->addReplyTo('info@example.com', 'Information');
-//            $mail->addCC('cc@example.com');
-//            $mail->addBCC('bcc@example.com');
+            /** Inclusão do arquivo desejado */
+            @include_once 'vendor/view/email/email_request_new_password.php';
 
-            /** Conteúdo */
-            $mail->isHTML(true);
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            /** Prego a estrutura do arquivo */
+            $html = ob_get_contents();
 
-            if(!$mail->Send()) {
+            /** Removo o arquivo incluido */
+            ob_clean();
 
-                /** Adição de elementos na array */
-                $message = 'Não foi possivel enviar o email:' . $mail->ErrorInfo;;
+            /** Envio de emil */
+            $Email->send($html, $resultUser, utf8_decode('Redefinição de senha'), $resultConfigurations);
 
-            } else {
-
-                /** Adição de elementos na array */
-                $message = 'Foi enviado um link para redefinição de senha para o seu email.';
-
-            }
+            /** Mensagem de retorno */
+            $message = 'Foi enviado um link para redefinição de senha para o seu email';
 
             /** Result **/
             $result = [

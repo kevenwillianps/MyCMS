@@ -126,6 +126,16 @@
 
                 </li>
 
+                <li class="nav-item">
+
+                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONTACTS&ACTION=CONTACTS_DATAGRID')">
+
+                        <i class="fas fa-inbox mr-1"></i>Mensagens
+
+                    </a>
+
+                </li>
+
             </ul>
 
         </div>

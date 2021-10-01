@@ -3,12 +3,14 @@
 /** Importação de classes */
 use \vendor\model\Main;
 use \vendor\model\Users;
+use \vendor\model\Configurations;
 use \vendor\controller\users\UsersValidate;
 use \vendor\controller\email\Email;
 
 /** Instânciamento de classes */
 $Main = new Main();
 $Users = new Users();
+$Configurations = new Configurations();
 $UsersValidate = new UsersValidate();
 $Email = new Email();
 
@@ -18,6 +20,9 @@ $result = Array();
 
 try
 {
+
+    /** Operações */
+    $resultConfigurations = (object)json_decode(base64_decode($Configurations->All()->preferences));
 
     /** Parâmetros de entrada */
     $UsersValidate->setEmail(@(string)$_POST['email']);
@@ -94,7 +99,7 @@ try
                 ob_clean();
 
                 /** Envio de emil */
-                $Email->send($html, $resultUser, 'Login Realizado');
+                $Email->send($html, $resultUser, 'Login Realizado', $resultConfigurations);
 
                 /** Result **/
                 $result = [

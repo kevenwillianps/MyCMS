@@ -81,9 +81,6 @@ try
 catch(Exception $exception)
 {
 
-    /** Controle de mensagens */
-    $message = array();
-
     /** Adição de elementos na array */
     $message  = '<span class="badge badge-primary">Detalhes.:</span> ' . 'código = ' . $exception->getCode() . ' - linha = ' . $exception->getLine() . ' - arquivo = ' . $exception->getFile() . '</br>';
     $message .= '<span class="badge badge-primary">Mensagem.:</span> ' . $exception->getMessage();

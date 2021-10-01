@@ -122,7 +122,7 @@ $resultConfiguration->preferences = (object)json_decode(base64_decode($resultCon
 
         </div>
 
-        <div class="col-md-6 d-flex">
+        <div class="col-md d-flex">
 
             <div class="card shadow-sm w-100">
 
@@ -184,7 +184,89 @@ $resultConfiguration->preferences = (object)json_decode(base64_decode($resultCon
 
         </div>
 
-        <div class="col-md-6 d-flex">
+        <div class="col-md d-flex">
+
+            <div class="card shadow-sm w-100">
+
+                <div class="card-body">
+
+                    <h6 class="card-title text-semi-bold">
+
+                        <i class="fas fa-at mr-1"></i>Email
+
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li class="media">
+
+                            <div class="media-body">
+
+                                <h6 class="mt-0">
+
+                                    <i class="fas fa-server mr-1"></i>Host
+
+                                </h6>
+
+                                <p>
+
+                                    <?php echo utf8_encode(@(string)$resultConfiguration->preferences->email_host)?>
+
+                                </p>
+
+                            </div>
+
+                        </li>
+
+                        <li class="media">
+
+                            <div class="media-body">
+
+                                <h6 class="mt-0">
+
+                                    <i class="fas fa-user mr-1"></i>Usuário
+
+                                </h6>
+
+                                <p>
+
+                                    <?php echo utf8_encode(@(string)$resultConfiguration->preferences->email_username)?>
+
+                                </p>
+
+                            </div>
+
+                        </li>
+
+                        <li class="media">
+
+                            <div class="media-body">
+
+                                <h6 class="mt-0">
+
+                                    <i class="fas fa-door-open mr-1"></i>Port
+
+                                </h6>
+
+                                <p>
+
+                                    <?php echo utf8_encode(@(string)$resultConfiguration->preferences->email_port)?>
+
+                                </p>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md d-flex">
 
             <div class="card shadow-sm w-100">
 

@@ -94,11 +94,7 @@
 
        <div class="container">
 
-           <div id="page-wrapper" class="mt-3">
-
-
-
-           </div>
+           <div id="page-wrapper" class="mt-3"></div>
            
        </div>
 
@@ -122,4 +118,3 @@
 
 </body>
 </html>
-

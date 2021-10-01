@@ -17,7 +17,7 @@
     $UsersValidate->setUserId(@(int)$_SESSION['USER_ID']);
 
     /** Busca de registro */
-    $resultUsers = $Users->Get($UsersValidate->getUserId());
+    $resultUsers = $Users->GetProfile($UsersValidate->getUserId());
 
 ?>
 
@@ -39,16 +39,6 @@
 
     </div>
 
-    <div class="col-md-6 text-right">
-
-        <a type="button" class="btn btn-primary btn-sm" onclick="request('FOLDER=VIEW&PRODUCT=GR&TABLE=GUSUARIO&ACTION=G_USUARIO_FORM')">
-
-            <i class="fas fa-pencil-alt mr-1"></i>Editar
-
-        </a>
-
-    </div>
-
 </div>
 
 <div class="bg-white shadow-sm rounded overflow-hidden animate slideIn border">
@@ -59,39 +49,37 @@
 
             <div class="profile mr-3">
 
-                <a type="button" class="btn btn-outline-light btn-sm btn-block mb-2" onclick="request('FOLDER=VIEW&amp;TABLE=USERS&amp;ACTION=USERS_FILE_COVER_FORM&amp;USER_ID=1')">
+                <a type="button" class="btn btn-outline-light btn-sm btn-block mb-2" onclick="request('FOLDER=VIEW&TABLE=USERS_FILES&ACTION=USERS_FILES_FORM_PROFILE')">
 
-                    Alterar Capa
+                    Alterar Perfil
 
                 </a>
 
-                <a type="button" class="btn btn-outline-light btn-sm btn-block mb-2" onclick="request('FOLDER=VIEW&amp;TABLE=USERS&amp;ACTION=USERS_FILE_PROFILE_FORM&amp;USER_ID=1')">
+                <a type="button" class="btn btn-outline-light btn-sm btn-block mb-2" onclick="request('FOLDER=VIEW&TABLE=USERS_FILES&ACTION=USERS_FILES_FORM_COVER')">
 
-                    Alterar Foto
+                    Alterar Capa
 
                 </a>
 
                 <?php
 
                 /** Verifico se a imagem esta preenchida */
-                if (empty(@(string)$resultUsers->FOTO))
+                if (empty(@(string)$resultUsers->path_profile))
                 { ?>
 
                     <img src="image/profile_perfil.png" alt="keven" width="130" class="rounded mb-2 img-thumbnail">
 
                 <?php }else{ ?>
 
-                    <img src="data:image/jpeg;base64, <?php echo utf8_encode($resultUsuario->FOTO)?>" alt="keven" width="130" class="rounded mb-2 img-thumbnail">
+                    <img src="<?php echo utf8_encode(@(string)$resultUsers->path_profile)?>/<?php echo utf8_encode(@(string)$resultUsers->name)?>" alt="keven" width="130" class="rounded mb-2 img-thumbnail">
 
                 <?php }?>
-
 
                 <a type="button" class="btn btn-outline-dark btn-sm btn-block" onclick="request('FOLDER=VIEW&amp;TABLE=USERS&amp;ACTION=USERS_PROFILE_FORM&amp;USER_ID=1')">
 
                     Editar Perfil
 
                 </a>
-
 
             </div>
 

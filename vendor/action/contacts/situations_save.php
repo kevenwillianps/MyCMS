@@ -1,12 +1,12 @@
 <?php
 
 /** Importação de classes */
-use vendor\model\Users;
-use vendor\controller\users\UsersValidate;
+use vendor\model\Situations;
+use vendor\controller\situations\SituationsValidate;
 
 /** Instânciamento de classes */
-$Users = new Users();
-$UsersValidate = new UsersValidate();
+$Situations = new Situations();
+$SituationsValidate = new SituationsValidate();
 
 /** Controle de mensagens */
 $message = null;
@@ -16,21 +16,15 @@ $history = array();
 try {
 
     /** Parâmetros de entrada */
-    $UsersValidate->setUserId(@(int)filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_STRING));
-    $UsersValidate->setNameFirst(@(string)filter_input(INPUT_POST, 'name_first', FILTER_SANITIZE_STRING));
-    $UsersValidate->setNameLast(@(string)filter_input(INPUT_POST, 'name_last', FILTER_SANITIZE_STRING));
-    $UsersValidate->setDateBirth(@(string)filter_input(INPUT_POST, 'date_birth', FILTER_SANITIZE_STRING));
-    $UsersValidate->setEmail(@(string)filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING));
-    $UsersValidate->setPassword(@(string)filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
-
-    /** Busco o registro */
-    $resultUsers = $Users->Get($UsersValidate->getUserId());
+    $SituationsValidate->setSituationId(@(int)$_POST['situation_id']);
+    $SituationsValidate->setName(@(string)$_POST['name']);
+    $SituationsValidate->setDescription(@(string)$_POST['description']);
 
     /** Verifico o tipo de histórico */
-    if ($Users->Get($UsersValidate->getUserId()) > 0) {
+    if ($SituationsValidate->getSituationId() > 0) {
 
         /** Busco o Histórico */
-        $resultHistory = json_decode(base64_decode($resultUsers->history),true);
+        $resultHistory = json_decode(base64_decode($Situations->Get($SituationsValidate->getSituationId())->history),true);
 
         /** Captura dos dados de login */
         $history[0]['title'] = 'Atualização';
@@ -53,41 +47,24 @@ try {
     $history[0]['time'] = date('H:i:s');
 
     /** Salvo o histórico do registro */
-    $UsersValidate->setHistory(base64_encode(json_encode($history, JSON_PRETTY_PRINT)));
-
-    /** Verifico se devo alterar a senha */
-    if ($UsersValidate->getUserId() > 0 && empty($UsersValidate->getPassword()))
-    {
-
-        /** Busco a senha existente */
-        $UsersValidate->setPassword($resultUsers->password);
-
-    }
-    else
-    {
-
-        /** Criptografo a senha */
-        $UsersValidate->setPassword(md5($UsersValidate->getPassword()));
-
-    }
+    $SituationsValidate->setHistory(base64_encode(json_encode($history, JSON_PRETTY_PRINT)));
 
     /** Verifico a existência de erros */
-    if (!empty($UsersValidate->getErrors())) {
+    if (!empty($SituationsValidate->getErrors())) {
 
         /** Preparo o formulario para retorno **/
         $result = [
 
             'cod' => 0,
             'title' => 'Atenção',
-            'message' => $UsersValidate->getErrors(),
+            'message' => $SituationsValidate->getErrors(),
 
         ];
 
     } else {
 
         /** Verifico se o usuário foi localizado */
-        if ($Users->Save($UsersValidate->getUserId(), $UsersValidate->getNameFirst(), $UsersValidate->getNameLast(), $UsersValidate->getDateBirth(), $UsersValidate->getEmail(), $UsersValidate->getPassword(), $UsersValidate->getHistory()))
-        {
+        if ($Situations->Save($SituationsValidate->getSituationId(), $SituationsValidate->getName(), $SituationsValidate->getDescription(), $SituationsValidate->getHistory())) {
 
             /** Adição de elementos na array */
             $message = 'Registro salvo com sucesso';
@@ -98,7 +75,7 @@ try {
                 'cod' => 200,
                 'title' => 'Sucesso',
                 'message' => $message,
-                'redirect' => 'FOLDER=VIEW&TABLE=USERS&ACTION=USERS_DATAGRID',
+                'redirect' => 'FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DATAGRID',
 
             ];
 
@@ -128,8 +105,8 @@ try {
 
 } catch (Exception $exception) {
 
-    /** Adição de elementos na array */
-    $message  = '<span class="badge badge-primary">Detalhes.:</span> ' . 'código = ' . $exception->getCode() . ' - linha = ' . $exception->getLine() . ' - arquivo = ' . $exception->getFile() . '</br>';
+    /** Controle de mensagens */
+    $message = '<span class="badge badge-primary">Detalhes.:</span> ' . 'código = ' . $exception->getCode() . ' - linha = ' . $exception->getLine() . ' - arquivo = ' . $exception->getFile() . '</br>';
     $message .= '<span class="badge badge-primary">Mensagem.:</span> ' . $exception->getMessage();
 
     /** Preparo o formulario para retorno **/
