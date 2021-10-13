@@ -13,14 +13,24 @@ CREATE TABLE configurations (
 
 
 CREATE TABLE users (
-  user_id    INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name_first VARCHAR(121) NOT NULL,
-  name_last  VARCHAR(121) NOT NULL,
-  date_birth DATE         NOT NULL,
-  email      VARCHAR(121) NOT NULL,
-  password   VARCHAR(121) NOT NULL,
-  history    longtext     NOT NULL,
-  date       TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
+  user_id            INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_permission_id INT(11) UNSIGNED,
+  name_first         VARCHAR(121) NOT NULL,
+  name_last          VARCHAR(121) NOT NULL,
+  date_birth         DATE         NOT NULL,
+  email              VARCHAR(121) NOT NULL,
+  password           VARCHAR(121) NOT NULL,
+  history            longtext     NOT NULL,
+  date               TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
+)
+  ENGINE = innodb;
+
+CREATE TABLE users_permissions (
+  user_permission_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name               VARCHAR(121) NOT NULL,
+  description        VARCHAR(121) NOT NULL,
+  permissions        longtext     NOT NULL,
+  date               TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
 )
   ENGINE = innodb;
 
@@ -183,3 +193,9 @@ CREATE TABLE contacts (
   date       TIMESTAMP        DEFAULT CURRENT_TIMESTAMP
 )
   ENGINE = innodb;
+
+ALTER TABLE `users`
+  ADD CONSTRAINT `user_permission_id_fk` FOREIGN KEY (`user_permission_id`) REFERENCES `users_permissions` (`user_permission_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+COMMIT;

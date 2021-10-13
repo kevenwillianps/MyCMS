@@ -59,6 +59,7 @@ try
             $_SESSION['USER_ID'] = $resultUser->user_id;
             $_SESSION['USER_NAME_FIRST'] = $resultUser->name_first;
             $_SESSION['USER_NAME_LAST'] = $resultUser->name_last;
+            $_SESSION['USER_PERMISSIONS'] = (object)json_decode(base64_decode($resultUser->permissions), true);
 
             /** Busco o Histórico */
             $resultHistory = json_decode($resultUser->history,true);

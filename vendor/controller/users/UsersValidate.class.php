@@ -16,6 +16,7 @@ class UsersValidate
     private $info = array();
 
     private $userId = null;
+    private $userPermissionId = null;
     private $nameFirst = null;
     private $nameLast = null;
     private $dateBirth = null;
@@ -43,6 +44,22 @@ class UsersValidate
 
             /** Adiciono um elemento a array */
             array_push($this->errors, 'O campo "User ID", deve ser válido');
+
+        }
+
+    }
+
+    public function setUserPermissionId(int $userPermissionId): void
+    {
+
+        /** Tratamento da informação */
+        $this->userPermissionId = isset($userPermissionId) ? $this->Main->antiInjection($userPermissionId) : null;
+
+        /** Validação da informação */
+        if ($this->userPermissionId <= 0) {
+
+            /** Adiciono um elemento a array */
+            array_push($this->errors, 'O campo "Permissão", deve ser válido');
 
         }
 
@@ -149,6 +166,14 @@ class UsersValidate
 
         /** Retorno da informação */
         return (int)$this->userId;
+
+    }
+
+    public function getUserPermissionId(): int
+    {
+
+        /** Retorno da informação */
+        return (int)$this->userPermissionId;
 
     }
 

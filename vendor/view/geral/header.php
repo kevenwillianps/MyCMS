@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm" id="nav-main">
 
     <div class="container">
@@ -88,6 +89,16 @@
 
                 <li class="nav-item">
 
+                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_DATAGRID')">
+
+                        <i class="fas fa-lock mr-1"></i>Permissões
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
                     <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DATAGRID')">
 
                         <i class="fas fa-cog mr-1"></i>Situação
@@ -116,15 +127,23 @@
 
                 </li>
 
-                <li class="nav-item">
+                <?php
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONTENTS&ACTION=CONTENTS_DATAGRID')">
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->contents['read']))
+                {?>
 
-                        <i class="far fa-clipboard mr-1"></i>Conteúdo
+                    <li class="nav-item">
 
-                    </a>
+                        <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONTENTS&ACTION=CONTENTS_DATAGRID')">
 
-                </li>
+                            <i class="far fa-clipboard mr-1"></i>Conteúdo
+
+                        </a>
+
+                    </li>
+
+                <?php }?>
 
                 <li class="nav-item">
 

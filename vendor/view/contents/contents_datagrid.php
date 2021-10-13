@@ -1,10 +1,15 @@
 <?php
 
 /** Importação de classes */
+use \vendor\model\Main;
 use vendor\model\Contents;
 
 /** Instânciamento de Classes */
+$Main = new Main();
 $Contents = new Contents();
+
+/** Execução de método */
+$Main->SessionStart();
 
 ?>
 
@@ -26,15 +31,23 @@ $Contents = new Contents();
 
     </div>
 
-    <div class="col-md-6 text-right">
+    <?php
 
-        <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=CONTENTS&ACTION=CONTENTS_FORM')">
+    /** Permissão para criar */
+    if (!empty($_SESSION['USER_PERMISSIONS']->contents['create']))
+    {?>
 
-            <i class="fas fa-plus-circle mr-1"></i>Adicionar
+        <div class="col-md-6 text-right">
 
-        </button>
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=CONTENTS&ACTION=CONTENTS_FORM')">
 
-    </div>
+                <i class="fas fa-plus-circle mr-1"></i>Adicionar
+
+            </button>
+
+        </div>
+
+    <?php }?>
 
     <?php
 
@@ -156,7 +169,12 @@ $Contents = new Contents();
 
                                 <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenuButton">
 
-                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS&ACTION=CONTENTS_FORM&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContents->content_id)?>')">
+                                    <?php
+
+                                    if (!empty($resultUserPermissions->contents['update']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS&ACTION=CONTENTS_FORM&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContents->content_id)?>')">
 
                                         <span class="badge badge-primary mr-1">
 
@@ -164,9 +182,11 @@ $Contents = new Contents();
 
                                         </span>
 
-                                        Editar
+                                            Editar
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                     <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_FILES&ACTION=CONTENTS_FILES_DATAGRID&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContents->content_id)?>')">
 
@@ -204,7 +224,12 @@ $Contents = new Contents();
 
                                     </a>
 
-                                    <a type="button" class="dropdown-item" onclick="sendForm('#formContentsDelete_<?php echo utf8_encode(@(int)$keyResultContents)?>')">
+                                    <?php
+
+                                    if (!empty($resultUserPermissions->contents['delete']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="sendForm('#formContentsDelete_<?php echo utf8_encode(@(int)$keyResultContents)?>')">
 
                                         <span class="badge badge-danger mr-1">
 
@@ -212,9 +237,11 @@ $Contents = new Contents();
 
                                         </span>
 
-                                        Excluir
+                                            Excluir
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                 </div>
 

@@ -51,13 +51,7 @@
 
                 <a type="button" class="btn btn-outline-light btn-sm btn-block mb-2" onclick="request('FOLDER=VIEW&TABLE=USERS_FILES&ACTION=USERS_FILES_FORM_PROFILE')">
 
-                    Alterar Perfil
-
-                </a>
-
-                <a type="button" class="btn btn-outline-light btn-sm btn-block mb-2" onclick="request('FOLDER=VIEW&TABLE=USERS_FILES&ACTION=USERS_FILES_FORM_COVER')">
-
-                    Alterar Capa
+                    Alterar Foto
 
                 </a>
 
@@ -74,12 +68,6 @@
                     <img src="<?php echo utf8_encode(@(string)$resultUsers->path_profile)?>/<?php echo utf8_encode(@(string)$resultUsers->name)?>" alt="keven" width="130" class="rounded mb-2 img-thumbnail">
 
                 <?php }?>
-
-                <a type="button" class="btn btn-outline-dark btn-sm btn-block" onclick="request('FOLDER=VIEW&amp;TABLE=USERS&amp;ACTION=USERS_PROFILE_FORM&amp;USER_ID=1')">
-
-                    Editar Perfil
-
-                </a>
 
             </div>
 

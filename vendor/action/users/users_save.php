@@ -17,6 +17,7 @@ try {
 
     /** Parâmetros de entrada */
     $UsersValidate->setUserId(@(int)filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_STRING));
+    $UsersValidate->setUserPermissionId(@(int)filter_input(INPUT_POST, 'user_permission_id', FILTER_SANITIZE_STRING));
     $UsersValidate->setNameFirst(@(string)filter_input(INPUT_POST, 'name_first', FILTER_SANITIZE_STRING));
     $UsersValidate->setNameLast(@(string)filter_input(INPUT_POST, 'name_last', FILTER_SANITIZE_STRING));
     $UsersValidate->setDateBirth(@(string)filter_input(INPUT_POST, 'date_birth', FILTER_SANITIZE_STRING));
@@ -86,7 +87,7 @@ try {
     } else {
 
         /** Verifico se o usuário foi localizado */
-        if ($Users->Save($UsersValidate->getUserId(), $UsersValidate->getNameFirst(), $UsersValidate->getNameLast(), $UsersValidate->getDateBirth(), $UsersValidate->getEmail(), $UsersValidate->getPassword(), $UsersValidate->getHistory()))
+        if ($Users->Save($UsersValidate->getUserId(), $UsersValidate->getUserPermissionId(), $UsersValidate->getNameFirst(), $UsersValidate->getNameLast(), $UsersValidate->getDateBirth(), $UsersValidate->getEmail(), $UsersValidate->getPassword(), $UsersValidate->getHistory()))
         {
 
             /** Adição de elementos na array */

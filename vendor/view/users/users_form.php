@@ -2,9 +2,11 @@
 
     /** Importação de classes */
     use vendor\model\Users;
+    use vendor\model\UsersPermissions;
 
     /** Instânciamento de Classes */
     $Users = new Users();
+    $UsersPermissions = new UsersPermissions();
 
     /** Busco o registro */
     $resultUsers = $Users->Get(@(int)filter_input(INPUT_POST, 'USER_ID', FILTER_SANITIZE_STRING));
@@ -118,6 +120,44 @@
                     </label>
 
                     <input type="password" class="form-control" id="password" name="password">
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+
+                <div class="form-group">
+
+                    <label for="user_permission_id">
+
+                        Permissão:
+
+                    </label>
+
+                    <select name="user_permission_id" id="user_permission_id" class="form-control custom-select border" data-live-search="true" data-size="5">
+
+                        <option data-tokens="Selecione" value="0">
+
+                            Selecione...
+
+                        </option>
+
+                        <?php
+
+                        /** Listagem de Registros */
+                        foreach ($UsersPermissions->All() as $keyResultUsersPermissions => $resultUsersPermissions)
+                        { ?>
+
+                            <option data-tokens="<?php echo utf8_encode(@(string)$resultUsersPermissions->name)?>" value="<?php echo utf8_encode(@(int)$resultUsersPermissions->user_permission_id)?>" <?php echo utf8_encode(@(int)$resultUsersPermissions->user_permission_id === @(int)$resultUsers->user_permission_id) ? 'selected' : null?>>
+
+                                <?php echo utf8_encode(@(string)$resultUsersPermissions->name)?> - <?php echo utf8_encode(@(string)$resultUsersPermissions->description)?>
+
+                            </option>
+
+                        <?php }?>
+
+                    </select>
 
                 </div>
 
