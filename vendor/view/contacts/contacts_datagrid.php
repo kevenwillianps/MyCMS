@@ -1,10 +1,15 @@
 <?php
 
 /** Importação de classes */
+use \vendor\model\Main;
 use vendor\model\Contacts;
 
 /** Instânciamento de Classes */
+$Main = new Main();
 $Contacts = new Contacts();
+
+/** Operações Iniciais */
+$Main->SessionStart();
 
 ?>
 

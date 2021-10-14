@@ -51,81 +51,129 @@
 
             <ul class="navbar-nav mx-auto">
 
-                <li class="nav-item dropdown">
+                <?php
 
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->configurations['read']))
+                {?>
 
-                        <i class="fas fa-cog mr-1"></i>Configurações
+                    <li class="nav-item dropdown">
 
-                    </a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                    <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
-
-                        <a class="dropdown-item" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_DATAGRID')">
-
-                            Empresa
+                            <i class="fas fa-cog mr-1"></i>Configurações
 
                         </a>
 
-                        <a class="dropdown-item" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_IMAGE_PREFERENCE_DATAGRID')">
+                        <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
 
-                            Imagens
+                            <a class="dropdown-item" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_DATAGRID')">
+
+                                Empresa
+
+                            </a>
+
+                            <a class="dropdown-item" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONFIGURATIONS&ACTION=CONFIGURATIONS_IMAGE_PREFERENCE_DATAGRID')">
+
+                                Imagens
+
+                            </a>
+
+                        </div>
+
+                    </li>
+
+                <?php }?>
+
+                <?php
+
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->users_permissions['read']))
+                {?>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_DATAGRID')">
+
+                            <i class="fas fa-lock mr-1"></i>Permissões
 
                         </a>
 
-                    </div>
+                    </li>
 
-                </li>
+                <?php }?>
 
-                <li class="nav-item">
+                <?php
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_DATAGRID')">
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->users['read']))
+                {?>
 
-                        <i class="fas fa-users mr-1"></i>Usuários
+                    <li class="nav-item">
 
-                    </a>
+                        <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_DATAGRID')">
 
-                </li>
+                            <i class="fas fa-users mr-1"></i>Usuários
 
-                <li class="nav-item">
+                        </a>
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_DATAGRID')">
+                    </li>
 
-                        <i class="fas fa-lock mr-1"></i>Permissões
+                <?php }?>
 
-                    </a>
+                <?php
 
-                </li>
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->situations['read']))
+                {?>
 
-                <li class="nav-item">
+                    <li class="nav-item">
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DATAGRID')">
+                        <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DATAGRID')">
 
-                        <i class="fas fa-cog mr-1"></i>Situação
+                            <i class="fas fa-cog mr-1"></i>Situação
 
-                    </a>
+                        </a>
 
-                </li>
+                    </li>
 
-                <li class="nav-item">
+                <?php }?>
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_DATAGRID')">
+                <?php
 
-                        <i class="fas fa-highlighter mr-1"></i>Marcadores
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->highlighters['read']))
+                {?>
 
-                    </a>
+                    <li class="nav-item">
 
-                </li>
+                        <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_DATAGRID')">
 
-                <li class="nav-item">
+                            <i class="fas fa-highlighter mr-1"></i>Marcadores
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONTENT_CATEGORIES&ACTION=CONTENT_CATEGORIES_DATAGRID')">
+                        </a>
 
-                        <i class="fas fa-filter mr-1"></i>Categoria
+                    </li>
 
-                    </a>
+                <?php }?>
 
-                </li>
+                <?php
+
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->content_categories['read']))
+                {?>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONTENT_CATEGORIES&ACTION=CONTENT_CATEGORIES_DATAGRID')">
+
+                            <i class="fas fa-filter mr-1"></i>Categoria
+
+                        </a>
+
+                    </li>
+
+                <?php }?>
 
                 <?php
 
@@ -145,15 +193,23 @@
 
                 <?php }?>
 
-                <li class="nav-item">
+                <?php
 
-                    <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONTACTS&ACTION=CONTACTS_DATAGRID')">
+                /** Permissão para criar */
+                if (!empty($_SESSION['USER_PERMISSIONS']->contacts['read']))
+                {?>
 
-                        <i class="fas fa-inbox mr-1"></i>Mensagens
+                    <li class="nav-item">
 
-                    </a>
+                        <a class="nav-link" type="button" id="navbarDropdown" role="button" onclick="request('FOLDER=VIEW&TABLE=CONTACTS&ACTION=CONTACTS_DATAGRID')">
 
-                </li>
+                            <i class="fas fa-inbox mr-1"></i>Mensagens
+
+                        </a>
+
+                    </li>
+
+                <?php }?>
 
             </ul>
 

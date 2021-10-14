@@ -1,12 +1,17 @@
 <?php
 
 /** Importação de classes */
+use \vendor\model\Main;
 use vendor\model\Contents;
 use vendor\model\ContentsSubs;
 
 /** Instânciamento de Classes */
+$Main = new Main();
 $Contents = new Contents();
 $ContentsSubs = new ContentsSubs();
+
+/** Execução de método */
+$Main->SessionStart();
 
 /** Busco o registro */
 $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
@@ -37,15 +42,23 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
     </div>
 
-    <div class="col-md-2 text-right">
+    <?php
 
-        <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS&ACTION=CONTENTS_SUBS_FORM&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContent->content_id)?>')">
+    /** Permissão para criar */
+    if (!empty($_SESSION['USER_PERMISSIONS']->contents_subs['create']))
+    {?>
 
-            <i class="fas fa-plus-circle mr-1"></i>Adicionar
+        <div class="col-md-2 text-right">
 
-        </button>
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS&ACTION=CONTENTS_SUBS_FORM&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContent->content_id)?>')">
 
-    </div>
+                <i class="fas fa-plus-circle mr-1"></i>Adicionar
+
+            </button>
+
+        </div>
+
+    <?php }?>
 
     <?php
 
@@ -69,7 +82,7 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
                 <p>
 
-                    Nõ foram localizados registros
+                    Não foram localizados registros
 
                 </p>
 
@@ -155,7 +168,13 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
                                 <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenuButton">
 
-                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS&ACTION=CONTENTS_SUBS_FORM&CONTENT_SUB_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_sub_id)?>&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_id)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->contents_subs['update']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS&ACTION=CONTENTS_SUBS_FORM&CONTENT_SUB_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_sub_id)?>&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_id)?>')">
 
                                         <span class="badge badge-primary mr-1">
 
@@ -163,9 +182,11 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
                                         </span>
 
-                                        Editar
+                                            Editar
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                     <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS_FILES&ACTION=CONTENTS_SUBS_FILES_DATAGRID&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_id)?>&CONTENT_SUB_ID=<?php echo utf8_encode(@(int)$resultContentsSubs->content_sub_id)?>')">
 
@@ -191,7 +212,13 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
                                     </a>
 
-                                    <a type="button" class="dropdown-item" onclick="sendForm('#formContentsDelete_<?php echo utf8_encode(@(int)$keyResultContentsSubs)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->contents_subs['delete']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="sendForm('#formContentsDelete_<?php echo utf8_encode(@(int)$keyResultContentsSubs)?>')">
 
                                         <span class="badge badge-danger mr-1">
 
@@ -199,9 +226,11 @@ $resultContent = $Contents->Get(@(int)$_POST['CONTENT_ID']);
 
                                         </span>
 
-                                        Excluir
+                                            Excluir
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                 </div>
 

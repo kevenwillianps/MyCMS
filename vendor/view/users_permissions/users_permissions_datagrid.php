@@ -1,10 +1,15 @@
 <?php
 
 /** Importação de classes */
+use \vendor\model\Main;
 use vendor\model\UsersPermissions;
 
 /** Instânciamento de Classes */
+$Main = new Main();
 $UsersPermissions = new UsersPermissions();
+
+/** Execução de método */
+$Main->SessionStart();
 
 ?>
 
@@ -26,15 +31,23 @@ $UsersPermissions = new UsersPermissions();
 
     </div>
 
-    <div class="col-md-6 text-right">
+    <?php
 
-        <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_FORM')">
+    /** Permissão para criar */
+    if (!empty($_SESSION['USER_PERMISSIONS']->users_permissions['create']))
+    {?>
 
-            <i class="fas fa-plus-circle mr-1"></i>Adicionar
+        <div class="col-md-6 text-right">
 
-        </button>
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_FORM')">
 
-    </div>
+                <i class="fas fa-plus-circle mr-1"></i>Adicionar
+
+            </button>
+
+        </div>
+
+    <?php }?>
 
     <?php
 
@@ -144,7 +157,13 @@ $UsersPermissions = new UsersPermissions();
 
                                 <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenuButton">
 
-                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_FORM&USER_PERMISSION_ID=<?php echo utf8_encode(@(int)$resultUsersPermissions->user_permission_id)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->users_permissions['update']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_FORM&USER_PERMISSION_ID=<?php echo utf8_encode(@(int)$resultUsersPermissions->user_permission_id)?>')">
 
                                         <span class="badge badge-primary mr-1">
 
@@ -152,9 +171,11 @@ $UsersPermissions = new UsersPermissions();
 
                                         </span>
 
-                                        Editar
+                                            Editar
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                     <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=USERS_PERMISSIONS&ACTION=USERS_PERMISSIONS_DETAILS&USER_PERMISSION_ID=<?php echo utf8_encode(@(int)$resultUsersPermissions->user_permission_id)?>')">
 
@@ -168,7 +189,13 @@ $UsersPermissions = new UsersPermissions();
 
                                     </a>
 
-                                    <a type="button" class="dropdown-item" onclick="sendForm('#formUserPermission_<?php echo utf8_encode(@(int)$keyResultUsersPermissions)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->users_permissions['deletes']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="sendForm('#formUserPermission_<?php echo utf8_encode(@(int)$keyResultUsersPermissions)?>')">
 
                                         <span class="badge badge-danger mr-1">
 
@@ -176,9 +203,11 @@ $UsersPermissions = new UsersPermissions();
 
                                         </span>
 
-                                        Excluir
+                                            Excluir
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                 </div>
 

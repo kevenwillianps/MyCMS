@@ -171,7 +171,8 @@ $Main->SessionStart();
 
                                     <?php
 
-                                    if (!empty($resultUserPermissions->contents['update']))
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->contents['update']))
                                     {?>
 
                                         <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS&ACTION=CONTENTS_FORM&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContents->content_id)?>')">
@@ -212,7 +213,13 @@ $Main->SessionStart();
 
                                     </a>
 
-                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS&ACTION=CONTENTS_SUBS_DATAGRID&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContents->content_id)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->contents_subs['read']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=CONTENTS_SUBS&ACTION=CONTENTS_SUBS_DATAGRID&CONTENT_ID=<?php echo utf8_encode(@(int)$resultContents->content_id)?>')">
 
                                         <span class="badge badge-primary mr-1">
 
@@ -220,13 +227,16 @@ $Main->SessionStart();
 
                                         </span>
 
-                                        Vinculados
+                                            Vinculados
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                     <?php
 
-                                    if (!empty($resultUserPermissions->contents['delete']))
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->contents['delete']))
                                     {?>
 
                                         <a type="button" class="dropdown-item" onclick="sendForm('#formContentsDelete_<?php echo utf8_encode(@(int)$keyResultContents)?>')">

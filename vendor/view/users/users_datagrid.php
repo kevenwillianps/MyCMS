@@ -1,32 +1,41 @@
 <?php
 
 /** Importação de classes */
+use \vendor\model\Main;
 use \vendor\model\Users;
 
 /** Instânciamento de classes */
+$Main = new Main();
 $Users = new Users();
 
-/** Verifico se existem registros */
-if (count($Users->All()) > 0)
-{ ?>
+/** Operações Iniciais */
+$Main->SessionStart();
 
-    <div class="row animate slideIn">
+?>
 
-        <div class="col-md-6">
+<div class="row animate slideIn">
 
-            <h5 class="card-title">
+    <div class="col-md-6">
 
-                <strong>
+        <h5 class="card-title">
 
-                    <i class="fas fa-users mr-1"></i>Usuários
+            <strong>
 
-                </strong>
+                <i class="fas fa-users mr-1"></i>Usuários
 
-                /Listagem/
+            </strong>
 
-            </h5>
+            /Listagem/
 
-        </div>
+        </h5>
+
+    </div>
+
+    <?php
+
+    /** Permissão para criar */
+    if (!empty($_SESSION['USER_PERMISSIONS']->users['create']))
+    {?>
 
         <div class="col-md-6 text-right">
 
@@ -37,6 +46,17 @@ if (count($Users->All()) > 0)
             </button>
 
         </div>
+
+    <?php }?>
+
+</div>
+
+<?php
+/** Verifico se existem registros */
+if (count($Users->All()) > 0)
+{ ?>
+
+    <div class="row">
 
         <?php
 
@@ -103,17 +123,33 @@ if (count($Users->All()) > 0)
 
                             <div class="button mt-2 d-flex flex-row align-items-center">
 
-                                <button type="button" class="btn btn-sm btn-outline-danger w-100" onclick="sendForm('#formUsers_<?php echo utf8_encode(@(string)$keyResultUser)?>')">
+                                <?php
 
-                                    <i class="fas fa-fire-alt mr-1"></i>Excluir
+                                /** Permissão para criar */
+                                if (!empty($_SESSION['USER_PERMISSIONS']->users['delete']))
+                                {?>
 
-                                </button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger w-100" onclick="sendForm('#formUsers_<?php echo utf8_encode(@(string)$keyResultUser)?>')">
 
-                                <button type="button" class="btn btn-sm btn-primary w-100 ml-2" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_FORM&USER_ID=<?php echo utf8_encode(@(int)$resultUser->user_id)?>')">
+                                        <i class="fas fa-fire-alt mr-1"></i>Excluir
 
-                                    <i class="fas fa-pencil-alt mr-1"></i>Editar
+                                    </button>
 
-                                </button>
+                                <?php }?>
+
+                                <?php
+
+                                /** Permissão para criar */
+                                if (!empty($_SESSION['USER_PERMISSIONS']->users['update']))
+                                {?>
+
+                                    <button type="button" class="btn btn-sm btn-primary w-100 ml-2" onclick="request('FOLDER=VIEW&TABLE=USERS&ACTION=USERS_FORM&USER_ID=<?php echo utf8_encode(@(int)$resultUser->user_id)?>')">
+
+                                        <i class="fas fa-pencil-alt mr-1"></i>Editar
+
+                                    </button>
+
+                                <?php }?>
 
                             </div>
 
@@ -134,7 +170,7 @@ if (count($Users->All()) > 0)
 
     </div>
 
-    <?php
+<?php
 
 }else{ ?>
 

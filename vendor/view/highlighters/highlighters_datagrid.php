@@ -1,10 +1,15 @@
 <?php
 
 /** Importação de classes */
+use \vendor\model\Main;
 use vendor\model\Highlighters;
 
 /** Instânciamento de Classes */
+$Main = new Main();
 $Highlighters = new Highlighters();
+
+/** Operações Iniciais */
+$Main->SessionStart();
 
 ?>
 
@@ -26,15 +31,23 @@ $Highlighters = new Highlighters();
 
     </div>
 
-    <div class="col-md-6 text-right">
+    <?php
 
-        <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_FORM')">
+    /** Permissão para criar */
+    if (!empty($_SESSION['USER_PERMISSIONS']->highlighters['create']))
+    {?>
 
-            <i class="fas fa-plus-circle mr-1"></i>Adicionar
+        <div class="col-md-6 text-right">
 
-        </button>
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_FORM')">
 
-    </div>
+                <i class="fas fa-plus-circle mr-1"></i>Adicionar
+
+            </button>
+
+        </div>
+
+    <?php }?>
 
     <?php
 
@@ -58,7 +71,7 @@ $Highlighters = new Highlighters();
 
                 <p>
 
-                    Nõ foram localizados registros
+                    Não foram localizados registros
 
                 </p>
 
@@ -144,7 +157,13 @@ $Highlighters = new Highlighters();
 
                                 <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenuButton">
 
-                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_FORM&HIGHLIGHTER_ID=<?php echo utf8_encode(@(int)$resultHighlighters->highlighter_id)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->highlighters['update']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_FORM&HIGHLIGHTER_ID=<?php echo utf8_encode(@(int)$resultHighlighters->highlighter_id)?>')">
 
                                         <span class="badge badge-primary mr-1">
 
@@ -152,9 +171,11 @@ $Highlighters = new Highlighters();
 
                                         </span>
 
-                                        Editar
+                                            Editar
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                     <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=HIGHLIGHTERS&ACTION=HIGHLIGHTERS_DETAIL&HIGHLIGHTER_ID=<?php echo utf8_encode(@(int)$resultHighlighters->highlighter_id)?>')">
 
@@ -168,7 +189,13 @@ $Highlighters = new Highlighters();
 
                                     </a>
 
-                                    <a type="button" class="dropdown-item" onclick="sendForm('#formSituationDelete_<?php echo utf8_encode(@(int)$keyResultHighlighters)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->highlighters['delete']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="sendForm('#formSituationDelete_<?php echo utf8_encode(@(int)$keyResultHighlighters)?>')">
 
                                         <span class="badge badge-danger mr-1">
 
@@ -176,9 +203,11 @@ $Highlighters = new Highlighters();
 
                                         </span>
 
-                                        Excluir
+                                            Excluir
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                 </div>
 

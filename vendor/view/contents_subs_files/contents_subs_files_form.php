@@ -19,7 +19,7 @@ $resultContentSub = $ContentsSubs->Get(@(int)$_POST['CONTENT_SUB_ID']);
 
 ?>
 
-<div class="row animate__animated animate__fadeIn">
+<div class="row">
 
     <div class="col-md-10">
 

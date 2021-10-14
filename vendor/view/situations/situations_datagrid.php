@@ -1,10 +1,15 @@
 <?php
 
 /** Importação de classes */
+use \vendor\model\Main;
 use vendor\model\Situations;
 
 /** Instânciamento de Classes */
+$Main = new Main();
 $Situations = new Situations();
+
+/** Operações Iniciais */
+$Main->SessionStart();
 
 ?>
 
@@ -26,15 +31,23 @@ $Situations = new Situations();
 
     </div>
 
-    <div class="col-md-6 text-right">
+    <?php
 
-        <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_FORM')">
+    /** Permissão para criar */
+    if (!empty($_SESSION['USER_PERMISSIONS']->situations['create']))
+    {?>
 
-            <i class="fas fa-plus-circle mr-1"></i>Adicionar
+        <div class="col-md-6 text-right">
 
-        </button>
+            <button class="btn btn-primary btn-sm" type="button" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_FORM')">
 
-    </div>
+                <i class="fas fa-plus-circle mr-1"></i>Adicionar
+
+            </button>
+
+        </div>
+
+    <?php }?>
 
     <?php
 
@@ -132,7 +145,13 @@ $Situations = new Situations();
 
                                 <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenuButton">
 
-                                    <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_FORM&SITUATION_ID=<?php echo utf8_encode(@(int)$resultSituation->situation_id)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->situations['update']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_FORM&SITUATION_ID=<?php echo utf8_encode(@(int)$resultSituation->situation_id)?>')">
 
                                         <span class="badge badge-primary mr-1">
 
@@ -140,9 +159,11 @@ $Situations = new Situations();
 
                                         </span>
 
-                                        Editar
+                                            Editar
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                     <a type="button" class="dropdown-item" onclick="request('FOLDER=VIEW&TABLE=SITUATIONS&ACTION=SITUATIONS_DETAIL&SITUATION_ID=<?php echo utf8_encode(@(int)$resultSituation->situation_id)?>')">
 
@@ -156,7 +177,13 @@ $Situations = new Situations();
 
                                     </a>
 
-                                    <a type="button" class="dropdown-item" onclick="sendForm('#formSituationDelete_<?php echo utf8_encode(@(int)$keyResultSituation)?>')">
+                                    <?php
+
+                                    /** Permissão para criar */
+                                    if (!empty($_SESSION['USER_PERMISSIONS']->situations['delete']))
+                                    {?>
+
+                                        <a type="button" class="dropdown-item" onclick="sendForm('#formSituationDelete_<?php echo utf8_encode(@(int)$keyResultSituation)?>')">
 
                                         <span class="badge badge-danger mr-1">
 
@@ -164,9 +191,11 @@ $Situations = new Situations();
 
                                         </span>
 
-                                        Excluir
+                                            Excluir
 
-                                    </a>
+                                        </a>
+
+                                    <?php }?>
 
                                 </div>
 

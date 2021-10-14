@@ -11,7 +11,7 @@
 
 ?>
 
-<div class="row animate__animated animate__fadeIn mt-3">
+<div class="row mt-3">
 
     <div class="col-md-12">
 
